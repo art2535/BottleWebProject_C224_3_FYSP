@@ -18,7 +18,7 @@
     <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
     <Name>BottleWebProject_C224_3_FYSP</Name>
     <RootNamespace>BottleWebProject_C224_3_FYSP</RootNamespace>
-    <InterpreterId>MSBuild|env3.11|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env3.9|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -72,7 +72,7 @@
     <Interpreter Include="env3.11\">
       <Id>env3.11</Id>
       <Version>3.11</Version>
-      <Description>env3.11 (Python 3.11)</Description>
+      <Description>env3.11 (Python 3.11 (64-bit))</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
       <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
@@ -81,7 +81,7 @@
     <Interpreter Include="env3.9\">
       <Id>env3.9</Id>
       <Version>3.9</Version>
-      <Description>env3.9 (Python 3.9)</Description>
+      <Description>env3.9 (Python 3.9 (64-bit))</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
       <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
