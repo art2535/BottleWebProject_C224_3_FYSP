@@ -37,6 +37,7 @@ bld/
 [Ll]ogs/
 env3.9/
 env3.11/
+dynamic/ResultLogs.json
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
