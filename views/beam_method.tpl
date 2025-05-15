@@ -96,7 +96,7 @@
                             </div>
                             <div class="graph-plot">
                                 <h3>Tree Visualization</h3>
-                                <img src="/static/spanning_tree.png?{{ year }}" alt="Spanning Tree">
+                                <img src="/static/dynamic/graphs/spanning_tree.png?{{ year }}" alt="Spanning Tree">
                             </div>
                         % end
                     % end
