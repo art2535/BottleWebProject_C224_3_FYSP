@@ -10,9 +10,7 @@
 <body>
 
     <div class="card">
-        <header>
-            <h1>Theory on Depth-First Search Algorithm</h1>
-        </header>
+        <h2>Theory on Depth-First Search Algorithm</h2>
         
         <div class="theory-container">
             <div class="theory-header">
@@ -23,7 +21,9 @@
             </div>
         </div>
 
-        <div class="toggle-arrow" onclick="toggleTheory()">&#x25BC;</div>
+        <div class="toggle-arrow" onclick="toggleTheory()">
+            <span class="arrow">&#x25BC;</span>
+        </div>
 
         <section class="practical-application">
             <h2>Practical Application of the Algorithm</h2>
@@ -123,3 +123,4 @@
     <script src="/static/scripts/work-elements.js"></script>
 </body>
 </html>
+
