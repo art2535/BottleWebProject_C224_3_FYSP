@@ -11,15 +11,7 @@ from datetime import datetime
 from bottle import route, view, request, redirect, response, template, static_file
 
 # Paths for data and logos
-UPLOAD_DIR = 'static/resources/logos'
-DATA_FILE = 'static/resources/partners.json'
-os.makedirs(UPLOAD_DIR, exist_ok=True)
-
-# Load data on startup
-companies = []
-if os.path.exists(DATA_FILE):
-    with open(DATA_FILE, 'r', encoding='utf-8') as f:
-        companies = json.load(f)
+DATA_FILE = '/dynamic/logos/resultLogs.json'
 
 @route('/')
 @route('/home')
@@ -59,4 +51,40 @@ def section4():
     """Renders section 4."""
     return dict(
         year=datetime.now().year
+    )
+
+@route('/our_team')
+@view('our_team')
+def our_command():
+    members = [
+        {
+            'nickname': 'Meta4ora',
+            'role': 'Back-end developer',
+            'photo': '/static/dynamic/images/denis.jpg',
+            'comment': 'He worked on the server logic and integration of Beam Search.'
+        },
+        {
+            'nickname': 'art2535',
+            'role': 'Designer',
+            'photo': '/static/dynamic/images/artem.jpg',
+            'comment': 'Created the interface and visual style of the application.'
+        },
+        {
+            'nickname': 'Dyusha12',
+            'role': 'Logics',
+            'photo': '/static/dynamic/images/andrew.jpg',
+            'comment': 'Developed algorithms for building a spanning tree.'
+        },
+        {
+            'nickname': 'setixx',
+            'role': 'Logics',
+            'photo': '/static/dynamic/images/maxim.jpg',
+            'comment': 'Developed algorithms for building a spanning tree.'
+        }
+    ]
+    return dict(
+        title="Our team",
+        message="Our team",
+        year=datetime.now().year,
+        members=members
     )
