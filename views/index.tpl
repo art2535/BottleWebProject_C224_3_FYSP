@@ -30,7 +30,7 @@
         <div class="card">
             <h2>Beam Search</h2>
             <p>Beam Search is a heuristic search algorithm used in problems with large solution spaces. It explores a limited number of the best paths at each step, making it effective for tasks such as machine translation or planning.</p>
-            <a href="/section3" class="button">To Solution</a>
+            <a href="/beam" class="button">To Solution</a>
         </div>
 
         <div class="card">
