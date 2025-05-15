@@ -61,25 +61,25 @@ def our_command():
             'nickname': 'Meta4ora',
             'role': 'Back-end developer',
             'photo': '/static/dynamic/images/denis.jpg',
-            'comment': 'He worked on the server logic and integration of Beam Search.'
+            'comment': 'He worked on the server logic and integration of bfs algorithm.'
         },
         {
             'nickname': 'art2535',
-            'role': 'Designer',
+            'role': 'Back-end developer',
             'photo': '/static/dynamic/images/artem.jpg',
-            'comment': 'Created the interface and visual style of the application.'
+            'comment': 'Created a Beam Search algorithm and "Our team" visual style.'
         },
         {
             'nickname': 'Dyusha12',
             'role': 'Logics',
             'photo': '/static/dynamic/images/andrew.jpg',
-            'comment': 'Developed algorithms for building a spanning tree.'
+            'comment': 'Developed algorithms for dfs and visual style for algorithm.'
         },
         {
             'nickname': 'setixx',
-            'role': 'Logics',
+            'role': 'Designer',
             'photo': '/static/dynamic/images/maxim.jpg',
-            'comment': 'Developed algorithms for building a spanning tree.'
+            'comment': 'Created the interface and visual style of the application.'
         }
     ]
     return dict(
