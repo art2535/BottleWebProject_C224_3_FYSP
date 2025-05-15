@@ -1,0 +1,479 @@
+.card {
+    background-color: #f4f4f9;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fc;
+}
+
+header {
+    background-color: #598CC1;
+    color: #fff;
+    padding: 20px 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 10px 0 20px 0;
+}
+
+
+h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+
+section.card {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    margin-left: 70px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    background-color: #598CC1;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    margin: 0 auto;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-top: 50px;
+}
+
+.graph-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.adjacency-matrix, .graph-plot {
+    width: 70%;
+    margin-top: 40px;
+}
+
+h3 {
+    text-align: center;
+    margin: 10px 0 20px 0;
+    white-space: normal;
+    font-size: 2.5em;
+    color: black;
+}
+
+.card-content {
+    padding-top: 0;
+    font-size: 16px;
+    border-left: 6px solid #007BFF;
+    margin-left: -20px;
+    border-radius: 6px;
+    margin-top: -20px;
+}
+
+
+
+.compact-matrix {
+    width: auto;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.compact-matrix-ready {
+    width: auto;
+    border-collapse: collapse;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .compact-matrix-ready td {
+        padding: 4px;
+        border: 1px solid #ddd;
+        font-size: 12px;
+        width: 70px;
+        height: 30px;
+        text-align: center;
+        color: black;
+    }
+
+.compact-matrix td {
+    padding: 4px;
+    border: 1px solid #ddd;
+    font-size: 12px;
+    width: 70px;
+    height: 30px;
+    text-align: center;
+    color: black;
+}
+
+input[type="number"] {
+    width: 40px;
+    height: 25px;
+    text-align: center;
+    font-size: 16px;
+    padding: 2px;
+    margin: 2px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+    input[type="number"]:focus {
+        background-color: #eaf7e5;
+        border-color: #4CAF50;
+        outline: none;
+    }
+
+
+
+.tree-matrix {
+    margin-top: 15px;
+}
+
+    .tree-matrix table {
+        margin-top: 0px;
+    }
+
+strong {
+    color: #333;
+}
+
+p {
+    color: black;
+}
+
+
+.expandable-card {
+    position: relative;
+    max-width: 1000px;
+    max-height: 100px;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    padding-bottom: 40px;
+}
+
+    .expandable-card.expanded {
+        max-height: 10000px;
+    }
+
+#theoryText {
+    font-family: 'Georgia', serif;
+    font-size: 17px;
+    color: #333;
+    line-height: 1.8;
+}
+
+
+
+.expand-toggle {
+    position: absolute;
+    left: 50%;
+    margin-top: -15px;
+    transform: translateX(-50%);
+    background-color: #007BFF;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    user-select: none;
+    transition: transform 0.3s ease;
+}
+
+.expandable-card.expanded .expand-toggle {
+    transform: translateX(-50%) rotate(180deg);
+}
+
+.graph-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 38%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+    .graph-card h3 {
+        margin: 0;
+        padding-bottom: 10px;
+    }
+.graph-plot {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -5px;
+}
+
+    .graph-plot img {
+        max-width: 500px;
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+.graph-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+
+.matrix-card {
+    background-color: #e0e0e0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 2%;
+}
+
+    .matrix-card h3 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+.btn {
+    padding: 8px 16px;
+    background-color: #598CC1;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s;
+    width: 210px;
+    text-align: center;
+    height: 40px;
+}
+
+    .btn:hover {
+        background-color: #4b79a1;
+    }
+
+.input-group {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 20px;
+}
+
+.input-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    color: black;
+}
+
+input[type="number"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 80%;
+    margin: 0 auto;
+    color: black;
+}
+
+.input-group .input-field {
+    width: 80px;
+    height: 50px;
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+    .input-group .input-field:focus {
+        background-color: #eaf7e5;
+        border-color: #4CAF50;
+        outline: none;
+    }
+
+label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.theory-block {
+    background-color: #ffffff;
+    border-left: 6px solid #3498db;
+    padding: 0 25px 25px;
+    margin: 0 0 30px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    color: black;
+}
+
+    .theory-block summary {
+        padding: 15px 0;
+        font-weight: 600;
+        font-size: 18px;
+        color: #2c3e50;
+        cursor: pointer;
+        list-style: none;
+        color: black;
+    }
+
+    .theory-block[open] summary {
+        border-bottom: 1px solid #d1d5db;
+        margin-bottom: 15px;
+        color: black;
+    }
+
+    .theory-block p {
+        margin: 0 0 15px 0;
+        font-size: 12px;
+        color: #34495e;
+
+
+    }
+
+    .theory-block h1,
+    .theory-block h2,
+    .theory-block h3,
+    .theory-block h4,
+    .theory-block h5,
+    .theory-block h6 {
+        color: #2c3e50;
+        margin: 20px 0 10px;
+        font-weight: 600;
+        font-size: 17px;
+    }
+
+    .theory-block ul,
+    .theory-block ol {
+        margin: 15px 0;
+        padding-left: 25px;
+        color: black;
+    }
+
+    .theory-block li {
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: black;
+    }
+
+    .theory-block strong {
+        font-weight: 700;
+        color: black;
+    }
+
+    .theory-block em {
+        font-style: italic;
+        color: black;
+    }
+
+    .theory-block code {
+        background-color: #f1f3f5;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: 'Fira Code', 'Consolas', monospace;
+        font-size: 14px;
+        color: black;
+    }
+
+    .theory-block pre {
+        background-color: #f1f3f5;
+        padding: 15px;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-family: 'Fira Code', 'Consolas', monospace;
+        font-size: 14px;
+        line-height: 1.4;
+        color: black;
+    }
+
+.theory-container {
+    background-color: #ffffff;
+    border-left: 6px solid #3498db;
+    padding: 0 25px 25px;
+    margin: 0 0 30px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+    color: black;
+}
+.theory-header {
+    padding: 15px 0;
+    font-weight: 600;
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+.toggle-arrow {
+    cursor: pointer;
+    font-size: 30px;
+    user-select: none;
+    text-align: center;
+    margin-top: -45px; 
+    transition: transform 0.3s ease;
+    color: black;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.theory-container.open + .toggle-arrow {
+    transform: translateX(-50%) rotate(180deg);
+}
+
+
+.theory-container.open + .toggle-arrow {
+    transform: rotate(180deg);
+}
