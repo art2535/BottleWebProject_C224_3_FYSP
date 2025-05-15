@@ -36,6 +36,10 @@
     <Compile Include="routes.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="static\dynamic\" />
+    <Folder Include="static\dynamic\images\" />
+    <Folder Include="static\dynamic\logos\" />
+    <Folder Include="static\dynamic\theory\" />
     <Folder Include="static\" />
     <Folder Include="static\content\" />
     <Folder Include="static\fonts\" />
@@ -43,12 +47,18 @@
     <Folder Include="views\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="static\dynamic\images\andrew.jpg" />
+    <Content Include="static\dynamic\images\artem.jpg" />
+    <Content Include="static\dynamic\images\denis.jpg" />
+    <Content Include="static\dynamic\images\maxim.jpg" />
+    <Content Include="static\dynamic\theory\theory_beam_search.md" />
     <Content Include="requirements.txt" />
     <Content Include="static\content\bootstrap.css" />
     <Content Include="static\content\bootstrap.min.css" />
     <Content Include="static\content\site.css" />
     <Content Include="static\content\section.css" />
     <Content Include="static\content\main.css" />
+    <Content Include="static\content\team-card.css" />
     <Content Include="static\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="static\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="static\fonts\glyphicons-halflings-regular.ttf" />
@@ -73,6 +83,7 @@
     <Content Include="views\contact.tpl" />
     <Content Include="views\index.tpl" />
     <Content Include="views\layout.tpl" />
+    <Content Include="views\our_team.tpl" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env3.11\">
