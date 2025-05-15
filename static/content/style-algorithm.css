@@ -1,5 +1,5 @@
 .card {
-    background-color: #f4f4f9;
+    background-color: #7f9fba;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -46,15 +46,18 @@ section.card {
 }
 
 h2 {
-    background-color: #598CC1;
+    background-color: #9fc6e7;
     color: #fff;
     padding: 20px;
     text-align: center;
     border-radius: 12px;
-    margin: 0 auto;
-    max-width: 100%;
+    margin: 0;
+    width: 100%;
     box-sizing: border-box;
-    margin-top: 50px;
+}
+
+.practical-application {
+    margin-top: 20px;
 }
 
 .graph-section {
@@ -72,7 +75,7 @@ h3 {
     text-align: center;
     margin: 10px 0 20px 0;
     white-space: normal;
-    font-size: 2.5em;
+    font-size: 1.9em;
     color: black;
 }
 
@@ -228,10 +231,10 @@ p {
         margin: 0;
         padding-bottom: 10px;
     }
+
 .graph-plot {
     width: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: -5px;
@@ -288,9 +291,9 @@ p {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 18px;
     transition: background-color 0.3s;
-    width: 210px;
+    width: 250px;
     text-align: center;
     height: 40px;
 }
@@ -354,7 +357,7 @@ label {
     background-color: #ffffff;
     border-left: 6px solid #3498db;
     padding: 0 25px 25px;
-    margin: 0 0 30px 0;
+    margin: 10px 0 30px 0;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     color: black;
@@ -380,8 +383,6 @@ label {
         margin: 0 0 15px 0;
         font-size: 12px;
         color: #34495e;
-
-
     }
 
     .theory-block h1,
@@ -443,12 +444,13 @@ label {
     background-color: #ffffff;
     border-left: 6px solid #3498db;
     padding: 0 25px 25px;
-    margin: 0 0 30px 0;
+    margin: 15px 0 30px 0;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     position: relative;
     color: black;
 }
+
 .theory-header {
     padding: 15px 0;
     font-weight: 600;
@@ -457,24 +459,37 @@ label {
 }
 
 .toggle-arrow {
-    cursor: pointer;
-    font-size: 30px;
-    user-select: none;
+    position: relative;
+    left: 50%;
+    margin-top: -30px;
+    transform: translateX(-50%);
+    background-color: rgba(128, 128, 128, 0.6);
+    color: white;
+    width: 50px;
+    height: 25px;
+    border-radius: 0 0 25px 25px;
     text-align: center;
-    margin-top: -45px; 
-    transition: transform 0.3s ease;
-    color: black;
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
+    line-height: 25px;
+    cursor: pointer;
+    font-size: 24px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    user-select: none;
+    transition: background-color 0.3s ease;
 }
 
+    .toggle-arrow:hover {
+        background-color: rgba(128, 128, 128, 0.8);
+    }
 
-.theory-container.open + .toggle-arrow {
-    transform: translateX(-50%) rotate(180deg);
-}
+    .toggle-arrow:active {
+        background-color: rgba(128, 128, 128, 1);
+    }
 
+    .toggle-arrow .arrow {
+        display: inline-block;
+        transition: transform 0.3s ease;
+    }
 
-.theory-container.open + .toggle-arrow {
+.theory-container.open + .toggle-arrow .arrow {
     transform: rotate(180deg);
 }

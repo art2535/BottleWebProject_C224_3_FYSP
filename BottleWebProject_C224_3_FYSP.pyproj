@@ -60,6 +60,7 @@
     <Content Include="static\dynamic\images\andrew.jpg" />
     <Content Include="static\dynamic\images\artem.jpg" />
     <Content Include="static\dynamic\images\denis.jpg" />
+    <Content Include="static\dynamic\images\figure-dfs_1.jpg" />
     <Content Include="static\dynamic\images\maxim.jpg" />
     <Content Include="static\theory\dfs_theory.md">
       <SubType>Code</SubType>

@@ -39,13 +39,49 @@ To build a spanning tree using DFS, follow these steps:
 
 ### Example
 
-Suppose we have a graph with vertices 0, 1, 2 and edges between them. After running DFS, the algorithm can follow the following path:
+Suppose we have a graph with vertices 0, 1, 2, 3, 4 and edges between them. After running DFS, the algorithm can follow the following path:
 
-- It will start from the top 0.
-- Moves to vertex 1.
-- Moves to vertex 2.
+<pre>
+	graph = {
+        0: [1, 2],
+        1: [0, 2],
+        2: [0, 1, 3],
+        3: [2, 4],
+        4: [3]
+    }
 
-The algorithm will mark the edges (0,1), (1,2) as those that make up the spanning tree. It is important to note that the process itself may vary depending on the traversal order, especially if the graph contains multiple paths.
+    def dfs(graph, vertex, visited, parent, spanning_tree_edges):
+        visited.add(vertex)
+        for neighbor in graph[vertex]:
+            if neighbor not in visited:
+                spanning_tree_edges.append((vertex, neighbor))
+                dfs(graph, neighbor, visited, vertex, spanning_tree_edges)
+
+    def depth_first_search(graph, start_vertex):
+        visited = set()
+        spanning_tree_edges = []
+        dfs(graph, start_vertex, visited, None, spanning_tree_edges)
+        return spanning_tree_edges
+
+    spanning_tree_edges = depth_first_search(graph, 0)
+
+    print("Spanning Tree Edges:", spanning_tree_edges)
+</pre>
+
+### Output
+<pre>
+    Spanning Tree Edges: [(0, 1), (0, 2), (2, 3), (3, 4)]
+</pre>
+
+- It starts from vertex 0.
+- It moves to vertex 1, marking the edge (0, 1).
+- Then, it moves to vertex 2 (from vertex 1), marking the edge (1, 2).
+- It continues to vertex 3, marking the edge (2, 3).
+- Finally, it moves to vertex 4, marking the edge (3, 4).
+
+The edges that form the spanning tree are: (0, 1), (1, 2), (2, 3), and (3, 4). This is the correct result for the depth-first search starting from vertex 0 in the given graph.
+
+![Result spanning tree](../static/dynamic/images/figure-dfs_1.jpg)
 
 ### Algorithm Application
 
