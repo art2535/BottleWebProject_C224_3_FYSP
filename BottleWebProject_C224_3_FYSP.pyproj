@@ -30,6 +30,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.py" />
+    <Compile Include="beam_search_spanning_tree.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="bfs_spanning_tree.py">
       <SubType>Code</SubType>
     </Compile>
@@ -42,10 +45,11 @@
     <Folder Include="static\dynamic\" />
     <Folder Include="static\dynamic\images\" />
     <Folder Include="static\dynamic\logos\" />
-    <Folder Include="static\dynamic\theory\" />
+    <Folder Include="static\theory\" />
     <Folder Include="static\" />
     <Folder Include="static\content\" />
     <Folder Include="static\fonts\" />
+    <Folder Include="static\dynamic\graphs\" />
     <Folder Include="static\scripts\" />
     <Folder Include="views\" />
   </ItemGroup>
@@ -57,10 +61,10 @@
     <Content Include="static\dynamic\images\artem.jpg" />
     <Content Include="static\dynamic\images\denis.jpg" />
     <Content Include="static\dynamic\images\maxim.jpg" />
-    <Content Include="static\dynamic\theory\dfs_theory.md">
+    <Content Include="static\theory\dfs_theory.md">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="static\dynamic\theory\theory_beam_search.md" />
+    <Content Include="static\theory\theory_beam_search.md" />
     <Content Include="requirements.txt" />
     <Content Include="static\content\bootstrap.css" />
     <Content Include="static\content\bootstrap.min.css" />
@@ -72,6 +76,7 @@
     <Content Include="static\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="static\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="static\scripts\beam-method-script.js" />
     <Content Include="static\scripts\bootstrap.js" />
     <Content Include="static\scripts\bootstrap.min.js" />
     <Content Include="static\scripts\jquery-1.10.2.intellisense.js" />
@@ -84,12 +89,14 @@
     <Content Include="static\scripts\jquery.validate.unobtrusive.js" />
     <Content Include="static\scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="static\scripts\modernizr-2.6.2.js" />
+    <Content Include="static\scripts\our-team-script.js" />
     <Content Include="static\scripts\respond.js" />
     <Content Include="static\scripts\respond.min.js" />
     <Content Include="static\scripts\work-elements.js">
       <SubType>Code</SubType>
     </Content>
     <Content Include="static\scripts\_references.js" />
+    <Content Include="views\beam_method.tpl" />
     <Content Include="views\breadth_method.tpl" />
     <Content Include="views\about.tpl" />
     <Content Include="views\contact.tpl" />
