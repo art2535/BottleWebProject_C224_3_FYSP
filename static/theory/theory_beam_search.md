@@ -1,5 +1,3 @@
-## Theory: Spanning Tree Construction using Beam Search
-
 ### Key Concepts
 
 - **Graph Representation**: The graph is typically represented by an adjacency matrix or adjacency list, where each edge has an associated weight.
@@ -9,8 +7,6 @@
 ---
 
 ### Visual Example
-
-<img src="/static/resources/art2535.jpg" alt="Graph Example" align="left" width="300" style="margin-right: 20px; border: 1px solid #444; border-radius: 8px;">
 
 The image shows a weighted undirected graph with 6 vertices. Our goal is to construct a spanning tree using the **Beam Search** algorithm.
 

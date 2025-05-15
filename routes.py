@@ -1,5 +1,3 @@
-
-
 """
 Updated routes module to include the new sections.
 """
@@ -10,9 +8,7 @@ import json
 from datetime import datetime
 from bottle import route, view, request, redirect, response, template, static_file
 from theory_algorithm import get_theory
-
-# Paths for data and logos
-DATA_FILE = '/dynamic/logos/resultLogs.json'
+from beam_search_spanning_tree import beam_search_spanning_tree
 
 @route('/')
 @route('/home')
@@ -34,18 +30,63 @@ def section1():
 @view('depth_method')
 def section2():
     """Renders section 2."""
-    theory_text = get_theory('static/dynamic/theory/dfs_theory.md')
+    theory_text = get_theory('static/theory/dfs_theory.md')
     return dict(
         year=datetime.now().year,
         theory_text=theory_text
     )
 
-@route('/section3')
-@view('section3')
-def section3():
-    """Renders section 3."""
+@route('/beam', method=['GET', 'POST'])
+@view('beam_method')
+def beam():
+    result = None
+    result_is_error = False
+    form_data = {'n': '', 'adjacency': [], 'weights': []}
+
+    if request.method == 'POST':
+        try:
+            n = int(request.forms.get('n'))
+            form_data['n'] = str(n)
+
+            adjacency = []
+            for i in range(n):
+                row = []
+                for j in range(n):
+                    key = f'adjacency_{i}_{j}'
+                    value = int(request.forms.get(key, 0))
+                    row.append(value)
+                adjacency.append(row)
+            form_data['adjacency'] = adjacency
+          
+            weights = []
+            for i in range(n):
+                row = []
+                for j in range(n):
+                    key = f'weights_{i}_{j}'
+                    value = int(request.forms.get(key, 0))
+                    row.append(value)
+                weights.append(row)
+            form_data['weights'] = weights
+
+            start = 0
+            beam_width = 2
+
+            tree_result = beam_search_spanning_tree(n, adjacency, weights, start, beam_width)
+            result_is_error = isinstance(tree_result, str)
+            result = tree_result
+
+        except Exception as e:
+            result = f"Error: {e}"
+            result_is_error = True
+
+    theory_text = get_theory('static/theory/theory_beam_search.md')
+
     return dict(
-        year=datetime.now().year
+        year=datetime.now().year,
+        result=result,
+        result_is_error=result_is_error,
+        form_data=form_data,
+        theory_text=theory_text
     )
 
 @route('/section4')
