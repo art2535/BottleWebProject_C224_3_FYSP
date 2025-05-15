@@ -80,6 +80,8 @@ def draw_graph(result_matrix, adjacency_matrix, weight_matrix, n):
     plt.title("Spanning Tree (red edges)")
     plt.tight_layout()
 
-    static_path = 'static/dynamic/graphs'
-    plt.savefig(os.path.join(static_path, "spanning_tree.png"))
+    static_path = 'static/dynamic/graphs/spanning_tree.png'
+    os.makedirs(os.path.dirname(static_path), exist_ok=True)
+
+    plt.savefig(static_path)
     plt.close()
