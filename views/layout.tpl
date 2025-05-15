@@ -19,7 +19,7 @@
         <div class="navbar">
             <a href="/" class="nav-item{{ ' active' if title == 'Home' else '' }}">Home</a>
             <a href="/bfs" class="nav-item{{ ' active' if title == 'Section 1' else '' }}">BFS</a>
-            <a href="/section2" class="nav-item{{ ' active' if title == 'Section 2' else '' }}">DFS</a>
+            <a href="/dfs" class="nav-item{{ ' active' if title == 'Section 2' else '' }}">DFS</a>
             <a href="/section3" class="nav-item{{ ' active' if title == 'Section 3' else '' }}">Beam Search</a>
             <a href="/section4" class="nav-item{{ ' active' if title == 'Section 4' else '' }}">Greedy algorithm</a>
             <a href="/our_team" class="nav-item{{ ' active' if title == 'Our team' else '' }}">Our team</a>

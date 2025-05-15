@@ -9,6 +9,7 @@ import re
 import json
 from datetime import datetime
 from bottle import route, view, request, redirect, response, template, static_file
+from theory_algorithm import get_theory
 
 # Paths for data and logos
 DATA_FILE = '/dynamic/logos/resultLogs.json'
@@ -29,12 +30,14 @@ def section1():
         year=datetime.now().year
     )
 
-@route('/section2')
-@view('section2')
+@route('/dfs')
+@view('depth_method')
 def section2():
     """Renders section 2."""
+    theory_text = get_theory('static/dynamic/theory/dfs_theory.md')
     return dict(
-        year=datetime.now().year
+        year=datetime.now().year,
+        theory_text=theory_text
     )
 
 @route('/section3')
