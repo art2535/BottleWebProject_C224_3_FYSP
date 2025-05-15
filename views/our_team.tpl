@@ -98,7 +98,7 @@
     animate();
 
     // Add click event to cards
-    const cards = document.querySelectorAll('.card');
+    const cards = document.querySelectorAll('.team-card');
     console.log('Найдено карточек:', cards.length);
     cards.forEach(card => {
       card.addEventListener('click', (e) => {
