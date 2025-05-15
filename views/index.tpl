@@ -24,7 +24,7 @@
         <div class="card">
             <h2>DFS</h2>
             <p>Depth-First Search (DFS) is a graph traversal algorithm that explores as far as possible along each branch before backtracking. Using a stack or recursion, DFS is effective for finding cycles, connected components, and topological sorting.</p>
-            <a href="/section2" class="button">To Solution</a>
+            <a href="/dfs" class="button">To Solution</a>
         </div>
 
         <div class="card">

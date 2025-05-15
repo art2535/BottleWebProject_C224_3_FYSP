@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-% rebase('layout.tpl', title='Section 2', year=year)
+% rebase('layout.tpl', title='DFS', year=year)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
