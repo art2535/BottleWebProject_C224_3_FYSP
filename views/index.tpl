@@ -1,29 +1,42 @@
-% rebase('layout.tpl', title='Home Page', year=year)
+% rebase('layout.tpl', title='Home', year=year)
 
-<div class="jumbotron">
-    <h1>Bottle</h1>
-    <p class="lead">Bottle is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://bottlepy.org/docs/dev/index.html" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            Bottle gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+<div class="main-container">
+    <div class="description-container" style="text-align: center; margin-bottom: 40px; margin-top: 40px">
+        <h1 style="font-size: 2.5em; color: #333; margin-bottom: 20px;">Описание Web-приложения</h1>
+        <p style="font-size: 1.2em; line-height: 1.6; color: #555; max-width: 800px; margin: 0 auto;">
+            <strong>GRAFSYS</strong> — это веб-приложение, реализующее базовые алгоритмы из теории графов. 
+            Приложение позволяет выполнять обход неориентированных графов, строить остовные деревья и 
+            производить раскраску графа с минимальным числом цветов. Пользователь может задать граф через 
+            матрицу смежности или матрицу весов и получить результат в виде новых матриц и визуализации.
+            <br><br>
+            Проект разработан в учебных целях для закрепления знаний по теме 
+            <em>"Элементы теории графов"</em>.
         </p>
-        <p><a class="btn btn-default" href="http://bottlepy.org/docs/dev/index.html">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>The Python Package Index is a repository of software for the Python programming language.</p>
-        <p><a class="btn btn-default" href="https://pypi.python.org/pypi">Learn more &raquo;</a></p>
+
+    <div class="cards-container">
+        <div class="card">
+        <h2>BFS</h2>
+        <p>Поиск в ширину (BFS, Breadth-First Search) — это алгоритм обхода графа, который исследует все вершины на текущем уровне, прежде чем перейти к следующему. Используя очередь, BFS идеально подходит для нахождения кратчайших путей в невзвешенных графах и построения минимального остовного дерева.</p>
+        <a href="/bfs" class="button">К решению</a>
     </div>
-    <div class="col-md-4">
-        <h2>Microsoft Azure</h2>
-        <p>You can easily publish to Microsoft Azure using Visual Studio. Find out how you can host your application using a free trial today.</p>
-        <p><a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></p>
+
+    <div class="card">
+        <h2>DFS</h2>
+        <p>Поиск в глубину (DFS, Depth-First Search) — это алгоритм обхода графа, который углубляется в каждую ветвь до конца, прежде чем возвращаться назад. Используя стек или рекурсию, DFS эффективен для поиска циклов, компонент связности и топологической сортировки.</p>
+        <a href="/section2" class="button">К решению</a>
     </div>
+
+    <div class="card">
+        <h2>Beam Search</h2>
+        <p>Лучевой поиск (Beam Search) — это эвристический алгоритм поиска, используемый в задачах с большим пространством решений. Он исследует ограниченное количество лучших путей на каждом шаге, что делает его эффективным для задач, таких как машинный перевод или планирование.</p>
+        <a href="/section3" class="button">К решению</a>
+    </div>
+
+    <div class="card">
+        <h2>Greedy Algorithm</h2>
+        <p>Жадный алгоритм (Greedy Algorithm) — это метод решения задач, при котором на каждом шаге выбирается локально оптимальное решение. Он прост в реализации и эффективен для задач, таких как построение минимального остовного дерева или планирование задач.</p>
+        <a href="/section4" class="button">К решению</a>
+    </div>
+</div>
 </div>

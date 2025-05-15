@@ -1,35 +1,62 @@
+
+
 """
-Routes and views for the bottle application.
+Updated routes module to include the new sections.
 """
 
-from bottle import route, view
+import os
+import re
+import json
 from datetime import datetime
+from bottle import route, view, request, redirect, response, template, static_file
+
+# Paths for data and logos
+UPLOAD_DIR = 'static/resources/logos'
+DATA_FILE = 'static/resources/partners.json'
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+# Load data on startup
+companies = []
+if os.path.exists(DATA_FILE):
+    with open(DATA_FILE, 'r', encoding='utf-8') as f:
+        companies = json.load(f)
 
 @route('/')
 @route('/home')
 @view('index')
 def home():
     """Renders the home page."""
+    return dict(year=datetime.now().year)
+
+# Routes for sections 1-4
+@route('/bfs')
+@view('breadth_method')
+def section1():
+    """Renders section 1."""
     return dict(
         year=datetime.now().year
     )
 
-@route('/contact')
-@view('contact')
-def contact():
-    """Renders the contact page."""
+@route('/section2')
+@view('section2')
+def section2():
+    """Renders section 2."""
     return dict(
-        title='Contact',
-        message='Your contact page.',
         year=datetime.now().year
     )
 
-@route('/about')
-@view('about')
-def about():
-    """Renders the about page."""
+@route('/section3')
+@view('section3')
+def section3():
+    """Renders section 3."""
     return dict(
-        title='About',
-        message='Your application description page.',
+        year=datetime.now().year
+    )
+
+@route('/section4')
+@view('section4')
+def section4():
+    """Renders section 4."""
+    return dict(
         year=datetime.now().year
     )

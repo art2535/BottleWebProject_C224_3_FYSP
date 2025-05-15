@@ -1,0 +1,60 @@
+/* Section page styles */
+.section-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+    .section-container h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+/* Base section content styles */
+.section-content {
+    color: white;
+    border-radius: 40px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+/* Individual section background colors */
+.section1-content {
+    background-color: #598CC1;
+}
+
+.section2-content {
+    background-color: #9FC6E7;
+}
+
+.section3-content {
+    background-color: #8EC6D3;
+}
+
+.section4-content {
+    background-color: #BCDAE2;
+}
+
+.section-content h2 {
+    margin-top: 0;
+}
+
+.back-button {
+    display: block;
+    width: 150px;
+    margin: 20px auto;
+    padding: 12px 20px;
+    background-color: #5d8fc9;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 40px;
+    transition: background-color 0.3s;
+}
+
+    .back-button:hover {
+        background-color: #4a7cb3;
+    }
