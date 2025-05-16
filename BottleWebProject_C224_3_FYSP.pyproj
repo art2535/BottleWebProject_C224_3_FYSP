@@ -62,6 +62,12 @@
     <Content Include="static\dynamic\images\denis.jpg" />
     <Content Include="static\dynamic\images\figure-dfs_1.jpg" />
     <Content Include="static\dynamic\images\maxim.jpg" />
+    <Content Include="static\scripts\bfs-method-script.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="static\theory\bfs_theory.md">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="static\theory\dfs_theory.md">
       <SubType>Code</SubType>
     </Content>
