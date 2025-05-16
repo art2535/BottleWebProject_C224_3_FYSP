@@ -38,6 +38,7 @@ bld/
 env3.9/
 env3.11/
 static/dynamic/logos
+static/dynamic/graphs
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

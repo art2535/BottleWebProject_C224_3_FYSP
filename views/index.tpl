@@ -24,13 +24,13 @@
         <div class="card">
             <h2>DFS</h2>
             <p>Depth-First Search (DFS) is a graph traversal algorithm that explores as far as possible along each branch before backtracking. Using a stack or recursion, DFS is effective for finding cycles, connected components, and topological sorting.</p>
-            <a href="/section2" class="button">To Solution</a>
+            <a href="/dfs" class="button">To Solution</a>
         </div>
 
         <div class="card">
             <h2>Beam Search</h2>
             <p>Beam Search is a heuristic search algorithm used in problems with large solution spaces. It explores a limited number of the best paths at each step, making it effective for tasks such as machine translation or planning.</p>
-            <a href="/section3" class="button">To Solution</a>
+            <a href="/beam" class="button">To Solution</a>
         </div>
 
         <div class="card">
