@@ -20,7 +20,6 @@ From the current vertex, the algorithm moves to one of the unvisited adjacent ve
 
 - **Deep approach**: The algorithm delves into the graph until it is possible to go further, which makes it useful for finding paths or connected components.
 - **Stack Usage**: The DFS implementation uses the **stack** data structure, which stores the vertices to be visited. In the recursive version of the stack, the system stack plays the role.
-- **Memory**: In the worst case, the algorithm takes **O(V)** memory, where V is the number of vertices in the graph.
   
 ### A depth-first search algorithm for building a spanning tree
 
@@ -37,7 +36,7 @@ To build a spanning tree using DFS, follow these steps:
 3. **Ending**:
    After all the vertices are visited and the spanning tree is built, the algorithm shuts down.
 
-### Example
+### Example Code
 
 Suppose we have a graph with vertices 0, 1, 2, 3, 4 and edges between them. After running DFS, the algorithm can follow the following path:
 
@@ -79,8 +78,9 @@ Suppose we have a graph with vertices 0, 1, 2, 3, 4 and edges between them. Afte
 - It continues to vertex 3, marking the edge (2, 3).
 - Finally, it moves to vertex 4, marking the edge (3, 4).
 
-The edges that form the spanning tree are: (0, 1), (1, 2), (2, 3), and (3, 4). This is the correct result for the depth-first search starting from vertex 0 in the given graph.
+The edges that form the spanning tree are: ```(0, 1), (1, 2), (2, 3), and (3, 4)```. This is the correct result for the depth-first search starting from vertex 0 in the given graph.
 
+### Visualization
 ![Result spanning tree](../static/dynamic/images/figure-dfs_1.jpg)
 
 ### Algorithm Application

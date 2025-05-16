@@ -9,8 +9,8 @@
 </head>
 <body>
 
-    <div class="card">
-        <h2>Theory on Greedy Graph Coloring</h2>
+    <div class="card-gr">
+        <h2 class="h2-gr">Theory on Greedy Graph Coloring</h2>
 
         <div class="theory-container">
             <div class="theory-header">
@@ -30,7 +30,7 @@
         </div>
 
         <section class="practical-application">
-            <h2>Practical Application of the Algorithm</h2>
+            <h2 class="h2-gr">Practical Application of the Algorithm</h2>
 
             % if error_message:
             <p class="error-message">{{ error_message }}</p>
