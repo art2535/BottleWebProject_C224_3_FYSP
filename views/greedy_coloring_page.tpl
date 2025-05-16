@@ -7,7 +7,6 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="/static/content/style-algorithm.css">
     <style>
-        /* Additional styles for the coloring table if needed */
         .colors-table {
             width: auto;
             margin: 20px auto;
@@ -17,10 +16,16 @@
         .colors-table th, .colors-table td {
             border: 1px solid #ddd;
             padding: 8px;
-            color: black; /* Ensure text is visible */
+            color: black;
         }
         .colors-table th {
             background-color: #f2f2f2;
+        }
+        .color-cell {
+            width: 50px; /* Ширина ячейки с цветом */
+            height: 20px; /* Высота ячейки с цветом */
+            border: 1px solid #ccc;
+            display: inline-block; /* Для корректного отображения background-color */
         }
         .error-message {
             color: red;
@@ -64,7 +69,7 @@
                     <div class="matrix-card">
                         <h3>Adjacency Matrix and Graph Controls</h3>
                         <div class="controls">
-                            <button type="button" class="btn" onclick="colorGraph()">Color Graph</button>
+                            <button type="submit" class="btn" onclick="return validateAndSubmit();">Color Graph</button>
                             <button type="button" class="btn" onclick="makeSymmetric()">Make Symmetric</button>
                             <button type="button" class="btn" onclick="generateRandomValues()">Random Values</button>
                         </div>
@@ -81,8 +86,7 @@
                             <table class="compact-matrix" id="adjacencyMatrixTable">
                                 </table>
                         </div>
-                         <button type="submit" class="btn" style="margin-top: 20px; background-color: #4CAF50;" onclick="return internalSubmit();">Submit Adjacency Matrix</button>
-                    </div>
+                         </div>
 
                     <div class="graph-card">
                         <h3>Graph Visualization</h3>
@@ -104,14 +108,18 @@
                                 <thead>
                                     <tr>
                                         <th>Vertex</th>
-                                        <th>Color</th>
+                                        <th>Assigned Color ID</th>
+                                        <th>Color Sample</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     % for item in coloring_result_table:
                                     <tr>
                                         <td>{{ item['vertex'] }}</td>
-                                        <td>{{ item['color'] }}</td>
+                                        <td>{{ item['color_id'] }}</td>
+                                        <td>
+                                            <div class="color-cell" style="background-color: {{ item['hex_color'] }};"></div>
+                                        </td>
                                     </tr>
                                     % end
                                 </tbody>
