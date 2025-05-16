@@ -1,4 +1,3 @@
-// static/scripts/bfs-method-script.js
 function toggleTheory() {
     const content = document.getElementById('theoryContent');
     const arrow = document.querySelector('.arrow');
@@ -30,7 +29,7 @@ function updateMatrixTable(n) {
                 input.name = `edge_${i}_${j}`;
                 input.min = '0';
                 input.max = '1';
-                input.value = '0';
+                input.value = '0'; // Явно устанавливаем значение 0
                 input.required = true;
                 cell.appendChild(input);
                 row.appendChild(cell);
@@ -60,12 +59,12 @@ function generateRandomMatrix() {
     }, 0);
 }
 
-
 function clearFields() {
-    document.getElementById('matrix-form').reset();
-    document.getElementById('num_vertices').value = '3';
-    document.getElementById('start_vertex').value = '0';
-    updateMatrixTable(3);
+    const form = document.getElementById('graphForm'); // Исправлено на правильный ID формы
+    form.reset(); // Сбрасываем значения формы
+    const numVerticesInput = document.getElementById('num_vertices');
+    numVerticesInput.value = '3'; // Устанавливаем значение по умолчанию
+    updateMatrixTable(3); // Перестраиваем таблицу с n=3 и нулевыми значениями
 }
 
 document.getElementById('num_vertices').addEventListener('input', function () {
