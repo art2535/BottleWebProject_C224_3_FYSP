@@ -21,7 +21,7 @@
             <a href="/bfs" class="nav-item{{ ' active' if title == 'Section 1' else '' }}">BFS</a>
             <a href="/dfs" class="nav-item{{ ' active' if title == 'DFS' else '' }}">DFS</a>
             <a href="/beam" class="nav-item{{ ' active' if title == 'Beam Search' else '' }}">Beam Search</a>
-            <a href="/section4" class="nav-item{{ ' active' if title == 'Section 4' else '' }}">Greedy algorithm</a>
+            <a href="/greedy_coloring" class="nav-item{{ ' active' if title == 'Section 4' else '' }}">Greedy algorithm</a>
             <a href="/our_team" class="nav-item{{ ' active' if title == 'Our team' else '' }}">Our team</a>
         </div>
 
