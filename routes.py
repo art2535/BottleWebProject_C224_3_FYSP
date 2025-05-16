@@ -20,13 +20,116 @@ def home():
     """Renders the home page."""
     return dict(year=datetime.now().year)
 
+# routes.py
+import os
+import re
+import json
+from datetime import datetime
+from bottle import route, view, request, redirect, response, template, static_file
+from theory_algorithm import get_theory
+from beam_search_spanning_tree import beam_search_spanning_tree
+from graph_coloring_algorithm import greedy_graph_coloring, draw_colored_graph
+from bfs_spanning_tree import bfs_spanning_tree, draw_bfs_graph
+import matplotlib.pyplot as plt
+import matplotlib.colors
+
+@route('/')
+@route('/home')
+@view('index')
+def home():
+    """Renders the home page."""
+    return dict(year=datetime.now().year)
+
 # Routes for sections 1-4
-@route('/bfs')
+@route('/bfs', method=['GET', 'POST'])
 @view('breadth_method')
-def section1():
-    """Renders section 1."""
+def bfs():
+    """Renders the BFS page and handles spanning tree logic."""
+    year = datetime.now().year
+    theory_text = get_theory('static/theory/bfs_theory.md')
+    
+    # Initialize form data and results
+    form_data = {'num_vertices': '3', 'adjacency_matrix': [[0, 0, 0], [0, 0, 0], [0, 0, 0]], 'start_vertex': '0'}
+    result_matrix = None
+    tree_vertices = None
+    graph_image_path = '/static/dynamic/images/denis.jpg'  # Default image
+    error_message = None
+
+    if request.method == 'POST':
+        try:
+            # Get number of vertices
+            num_vertices_str = request.forms.get('num_vertices')
+            if not num_vertices_str or not num_vertices_str.isdigit() or int(num_vertices_str) <= 0:
+                raise ValueError("Number of vertices must be a positive integer.")
+
+            num_vertices = int(num_vertices_str)
+            form_data['num_vertices'] = num_vertices_str
+
+            # Get starting vertex
+            start_vertex_str = request.forms.get('start_vertex')
+            if not start_vertex_str or not start_vertex_str.isdigit() or int(start_vertex_str) < 0 or int(start_vertex_str) >= num_vertices:
+                raise ValueError(f"Starting vertex must be between 0 and {num_vertices - 1}.")
+            start_vertex = int(start_vertex_str)
+            form_data['start_vertex'] = start_vertex_str
+
+            # Get adjacency matrix
+            adjacency_matrix = []
+            for i in range(num_vertices):
+                row = []
+                for j in range(num_vertices):
+                    value_str = request.forms.get(f'edge_{i}_{j}')
+                    if value_str is None:
+                        raise ValueError(f"Missing input for adjacency matrix at ({i},{j}).")
+                    if not value_str.isdigit() or int(value_str) not in [0, 1]:
+                        raise ValueError(f"Adjacency matrix values must be 0 or 1 at ({i},{j}).")
+                    row.append(int(value_str))
+                adjacency_matrix.append(row)
+            form_data['adjacency_matrix'] = adjacency_matrix
+
+            # Validate matrix (optional: check for symmetry and no self-loops)
+            for i in range(num_vertices):
+                if adjacency_matrix[i][i] != 0:
+                    raise ValueError(f"Self-loops are not allowed at vertex {i}.")
+                for j in range(i + 1, num_vertices):
+                    if adjacency_matrix[i][j] != adjacency_matrix[j][i]:
+                        raise ValueError(f"Adjacency matrix must be symmetric at ({i},{j}) and ({j},{i}).")
+
+            # Run BFS to get spanning tree
+            result_matrix, tree_vertices = bfs_spanning_tree(num_vertices, adjacency_matrix, start_vertex)
+            if isinstance(result_matrix, str):
+                error_message = result_matrix
+                result_matrix = None
+                tree_vertices = None
+            else:
+                # Generate graph visualization
+                graph_image_path = draw_bfs_graph(result_matrix, adjacency_matrix, num_vertices)
+
+        except ValueError as ve:
+            error_message = str(ve)
+        except Exception as e:
+            error_message = f"An unexpected server error occurred: {e}"
+            print(f"Error in bfs: {e}")  # Log for debugging
+
+    # For GET requests or if POST fails, initialize empty matrix if needed
+    if request.method == 'GET' or error_message:
+        try:
+            num_vertices = int(form_data.get('num_vertices', 3))
+            if num_vertices > 0:
+                form_data['adjacency_matrix'] = [[0 for _ in range(num_vertices)] for _ in range(num_vertices)]
+            else:
+                form_data['adjacency_matrix'] = [[]]
+        except ValueError:
+            form_data['num_vertices'] = '3'
+            form_data['adjacency_matrix'] = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+
     return dict(
-        year=datetime.now().year
+        year=year,
+        theory_text=theory_text,
+        form_data=form_data,
+        result_matrix=result_matrix,
+        tree_vertices=tree_vertices,
+        graph_image_path=graph_image_path,
+        error_message=error_message
     )
 
 @route('/dfs')

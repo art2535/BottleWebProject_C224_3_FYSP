@@ -1,4 +1,4 @@
-### Beam Search — Algorithm for Building a Spanning Tree
+### Beam Search ï¿½ Algorithm for Building a Spanning Tree
 
 **Beam Search** is a heuristic search algorithm similar to breadth-first search (BFS) but with a restriction on the number of nodes (states) explored at each level. Instead of exploring all neighbors, it only keeps the best *k* candidates (where *k* is called the beam width). This reduces memory usage and speeds up the search, especially for large graphs, but the algorithm does not guarantee the optimal solution.
 

@@ -277,15 +277,18 @@ p {
 
 .controls {
     display: flex;
+    flex-wrap: nowrap;
     justify-content: space-between;
     gap: 10px;
-    width: 100%;
     margin-bottom: 20px;
     text-align: center;
+    max-width: 100%;
 }
 
 
 .btn {
+    flex: 1 1 auto;
+    white-space: nowrap;
     padding: 8px 16px;
     background-color: #598CC1;
     color: #fff;
@@ -294,9 +297,9 @@ p {
     cursor: pointer;
     font-size: 18px;
     transition: background-color 0.3s;
-    width: 250px;
     text-align: center;
     height: 40px;
+    width: 250px;
 }
 
     .btn:hover {
@@ -517,7 +520,7 @@ label {
     /* Можно добавить vertical-align: middle; если нужно выровнять по центру строки */
 }
 .error-message {
-    color: red;
+    color: #ffffff;
     text-align: center;
     margin: 10px 0;
     font-weight: bold;
