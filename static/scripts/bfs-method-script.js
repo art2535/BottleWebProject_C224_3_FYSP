@@ -48,19 +48,23 @@ function generateRandomMatrix() {
     }
     updateMatrixTable(n);
 
-    // Generate symmetric random adjacency matrix
-    for (let i = 0; i < n; i++) {
-        for (let j = i; j < n; j++) {
-            let value = i === j ? 0 : Math.floor(Math.random() * 2); // No self-loops
-            document.querySelector(`input[name="edge_${i}_${j}"]`).value = value;
-            document.querySelector(`input[name="edge_${j}_${i}"]`).value = value;
+    // Use setTimeout to ensure DOM is updated before filling values
+    setTimeout(() => {
+        for (let i = 0; i < n; i++) {
+            for (let j = i; j < n; j++) {
+                const value = i === j ? 0 : Math.floor(Math.random() * 2);
+                document.querySelector(`input[name="edge_${i}_${j}"]`).value = value;
+                document.querySelector(`input[name="edge_${j}_${i}"]`).value = value;
+            }
         }
-    }
+    }, 0);
 }
+
 
 function clearFields() {
     document.getElementById('matrix-form').reset();
     document.getElementById('num_vertices').value = '3';
+    document.getElementById('start_vertex').value = '0';
     updateMatrixTable(3);
 }
 
@@ -74,8 +78,6 @@ document.getElementById('num_vertices').addEventListener('input', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    const n = parseInt(document.getElementById('num_vertices').value);
-    if (!isNaN(n) && n >= 1) {
-        updateMatrixTable(n);
-    }
+    const n = parseInt(document.getElementById('num_vertices').value) || 3;
+    updateMatrixTable(n);
 });
