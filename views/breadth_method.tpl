@@ -9,8 +9,8 @@
 </head>
 <body>
 
-    <div class="card">
-        <h2>Theory on Breadth-First Search</h2>
+    <div class="card-bfs">
+        <h2 class="h2-bfs">Theory on Breadth-First Search</h2>
 
         <div class="theory-container">
             <div class="theory-header">
@@ -30,7 +30,7 @@
         </div>
 
         <section class="practical-application">
-            <h2>Practical Application of the Algorithm</h2>
+            <h2 class="h2-bfs">Practical Application of the Algorithm</h2>
 
             % if error_message:
                 <p class="error-message">{{ error_message }}</p>

@@ -9,10 +9,8 @@
 </head>
 <body>
 
-<div class="card">
-    <header>
-        <h1>Theory on Beam Search Algorithm</h1>
-    </header>
+<div class="card-bm">
+   <h2 class="h2-bm">Theory on Depth-First Search Algorithm</h2>
 
     <div class="theory-container">
         <div class="theory-header">
@@ -26,7 +24,7 @@
     <div class="toggle-arrow" onclick="toggleTheory()">&#x25BC;</div>
 
     <section class="practical-application">
-        <h2>Practical Application of the Algorithm</h2>
+        <h2 class="h2-bm">Practical Application of the Algorithm</h2>
 
         <form method="post" id="matrix-form">
             <div class="graph-section">
