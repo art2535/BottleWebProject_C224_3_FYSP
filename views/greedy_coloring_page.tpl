@@ -6,34 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="/static/content/style-algorithm.css">
-    <style>
-        .colors-table {
-            width: auto;
-            margin: 20px auto;
-            border-collapse: collapse;
-            text-align: center;
-        }
-        .colors-table th, .colors-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            color: black;
-        }
-        .colors-table th {
-            background-color: #f2f2f2;
-        }
-        .color-cell {
-            width: 50px; /* Ширина ячейки с цветом */
-            height: 20px; /* Высота ячейки с цветом */
-            border: 1px solid #ccc;
-            display: inline-block; /* Для корректного отображения background-color */
-        }
-        .error-message {
-            color: red;
-            text-align: center;
-            margin: 10px 0;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
 
