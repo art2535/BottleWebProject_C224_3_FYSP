@@ -32,6 +32,7 @@ function updateAdjacencyMatrixTable() {
     let header = table.createTHead();
     let headerRow = header.insertRow(-1);
     let th = document.createElement('th');
+    th.textContent = "V"; // Label for the corner
     headerRow.appendChild(th);
     for (let i = 0; i < numVertices; i++) {
         th = document.createElement('th');
@@ -44,6 +45,7 @@ function updateAdjacencyMatrixTable() {
         let row = tbody.insertRow(-1);
         let cellLabel = row.insertCell(-1);
         cellLabel.textContent = i;
+        cellLabel.style.fontWeight = "bold";
 
         for (let j = 0; j < numVertices; j++) {
             let cell = row.insertCell(-1);
@@ -53,12 +55,13 @@ function updateAdjacencyMatrixTable() {
             input.min = "0";
             input.max = "1";
             input.value = "0";
-            input.classList.add('input-field');
+            input.classList.add('input-field'); // Class from depth_method
             input.style.width = "40px";
             input.style.padding = "2px";
             if (i === j) {
                  input.value = "0";
-                 // input.readOnly = true; // Make diagonal cells read-only and 0
+                 input.readOnly = true; // Make diagonal cells read-only and 0
+                 input.style.backgroundColor = "#f0f0f0"; // Visually indicate read-only
             }
             cell.appendChild(input);
         }
@@ -70,20 +73,25 @@ function makeSymmetric() {
     if (isNaN(numVertices) || numVertices < 1) return;
 
     for (let i = 0; i < numVertices; i++) {
-        for (let j = i + 1; j < numVertices; j++) {
+        for (let j = i + 1; j < numVertices; j++) { // Iterate only through the upper triangle (j > i)
             const input_ij = document.querySelector(`input[name="edge_${i}_${j}"]`);
             const input_ji = document.querySelector(`input[name="edge_${j}_${i}"]`);
+
             if (input_ij && input_ji) {
-                // If one is changed, make the other the same.
-                // Prioritize the one being changed if we could detect that,
-                // otherwise, just pick one (e.g. input_ij.value)
-                if (input_ij.value !== input_ji.value) {
-                     input_ji.value = input_ij.value; // Or vice versa, or average, or set to 0/1 based on a rule
+                // If either one is '1', make both '1'. Otherwise, both are '0'.
+                if (input_ij.value === "1" || input_ji.value === "1") {
+                    input_ij.value = "1";
+                    input_ji.value = "1";
+                } else {
+                    // If both were '0' or one was '0' and other non-'1' (e.g. empty, invalid), set both to '0'
+                    input_ij.value = "0";
+                    input_ji.value = "0";
                 }
             }
         }
     }
-    for (let i = 0; i < numVertices; i++) { // Ensure diagonal is 0
+    // Ensure diagonal is 0 (already handled by readOnly, but good for explicit reset)
+    for (let i = 0; i < numVertices; i++) {
         const input_ii = document.querySelector(`input[name="edge_${i}_${i}"]`);
         if (input_ii) {
             input_ii.value = "0";
@@ -92,15 +100,21 @@ function makeSymmetric() {
 }
 
 function generateRandomValues() {
-    const numVertices = parseInt(document.getElementById('num_vertices').value);
+    const numVerticesInput = document.getElementById('num_vertices');
+    if (!numVerticesInput) return;
+    const numVertices = parseInt(numVerticesInput.value);
+
     if (isNaN(numVertices) || numVertices < 1) {
          alert("Please enter a valid number of vertices.");
         return;
     }
 
-    if (document.getElementById('adjacencyMatrixTable').rows.length === 0 && numVertices > 0) {
+    // Ensure table is generated if it's not already
+    const table = document.getElementById('adjacencyMatrixTable');
+    if ((!table.tHead || table.tHead.rows.length === 0) && numVertices > 0) {
         updateAdjacencyMatrixTable();
     }
+
 
     for (let i = 0; i < numVertices; i++) {
         for (let j = 0; j < numVertices; j++) {
@@ -109,15 +123,17 @@ function generateRandomValues() {
                 if (i === j) {
                     input.value = "0";
                 } else {
-                    input.value = Math.round(Math.random());
+                    // Generate for upper triangle, then symmetrize
+                    if (j > i) {
+                        input.value = Math.round(Math.random());
+                    }
                 }
             }
         }
     }
-    makeSymmetric();
+    makeSymmetric(); // Call to make the randomly generated upper triangle symmetric
 }
 
-// Renamed from colorGraph to be more generic for form submission validation
 function validateAndSubmit() {
     const numVerticesInput = document.getElementById('num_vertices');
     if (!numVerticesInput) {
@@ -127,6 +143,7 @@ function validateAndSubmit() {
     const numVertices = parseInt(numVerticesInput.value);
     if (isNaN(numVertices) || numVertices < 1) {
         alert("Please enter a valid number of vertices (at least 1).");
+        numVerticesInput.focus();
         return false;
     }
 
@@ -142,46 +159,60 @@ function validateAndSubmit() {
                  input_ij.focus();
                  return false;
             }
-             if (i === j && input_ij.value !== "0") {
+             if (i === j && input_ij.value !== "0") { // Self-loops must be 0
                 alert(`Diagonal elements (self-loops) like at (${i},${j}) must be 0 for simple graph coloring.`);
                 input_ij.value = "0";
                 input_ij.focus();
-                return false; // Or just correct and allow submission
+                return false;
+            }
+            // Check for symmetry if desired before submission, though backend should handle it
+            if (j > i) {
+                const input_ji = document.querySelector(`input[name="edge_${j}_${i}"]`);
+                if (input_ji && input_ij.value !== input_ji.value) {
+                    alert(`Matrix is not symmetric at (${i},${j}) and (${j},${i}). Please use 'Make Symmetric' or correct manually.`);
+                    input_ij.focus();
+                    return false;
+                }
             }
         }
     }
-    // If all validations pass, the form will submit due to type="submit"
-    return true;
+    return true; // Allow form submission
 }
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    updateAdjacencyMatrixTable();
+    updateAdjacencyMatrixTable(); // Initial table generation
 
-    // Repopulate matrix from form_data if it exists (e.g., on page reload after POST)
-    // This requires form_data.adjacency_matrix to be available in a way JS can access.
-    // For simplicity, we assume Bottle template might directly set values in input fields
-    // if form_data was passed back. If not, this part can be enhanced.
-    const adjMatrixDataElement = document.getElementById('adjacencyMatrixData');
-    if (adjMatrixDataElement) {
+    // Attempt to repopulate matrix from form_data if it exists (e.g., on page reload after POST)
+    // This assumes 'form_data_json' is a script tag with JSON content rendered by the template
+    const formDataJsonElement = document.getElementById('form_data_json');
+    if (formDataJsonElement) {
         try {
-            const matrixData = JSON.parse(adjMatrixDataElement.textContent);
-            if (matrixData && matrixData.length > 0) {
-                const numVertices = matrixData.length;
-                document.getElementById('num_vertices').value = numVertices; // Set vertex count
-                updateAdjacencyMatrixTable(); // Regenerate table based on count
-
-                for (let i = 0; i < numVertices; i++) {
-                    for (let j = 0; j < numVertices; j++) {
-                        const inputElement = document.querySelector(`input[name="edge_${i}_${j}"]`);
-                        if (inputElement && matrixData[i] && matrixData[i][j] !== undefined) {
-                            inputElement.value = matrixData[i][j];
+            const formData = JSON.parse(formDataJsonElement.textContent);
+            if (formData && formData.num_vertices) {
+                 const numVertices = parseInt(formData.num_vertices);
+                 const numVerticesInput = document.getElementById('num_vertices');
+                 if(numVerticesInput && numVerticesInput.value != numVertices){ // Avoid re-render if value already correct
+                    numVerticesInput.value = numVertices;
+                    updateAdjacencyMatrixTable(); // Re-generate table if vertex count changed
+                 }
+            }
+            if (formData && formData.adjacency_matrix && formData.adjacency_matrix.length > 0) {
+                const matrixData = formData.adjacency_matrix;
+                const currentNumVertices = parseInt(document.getElementById('num_vertices').value);
+                if (matrixData.length === currentNumVertices) {
+                    for (let i = 0; i < currentNumVertices; i++) {
+                        for (let j = 0; j < currentNumVertices; j++) {
+                            const inputElement = document.querySelector(`input[name="edge_${i}_${j}"]`);
+                            if (inputElement && matrixData[i] && matrixData[i][j] !== undefined) {
+                                inputElement.value = matrixData[i][j];
+                            }
                         }
                     }
                 }
             }
         } catch (e) {
-            console.error("Error parsing adjacency matrix data for repopulation:", e);
+            console.error("Error parsing or applying form_data_json:", e);
         }
     }
 });
