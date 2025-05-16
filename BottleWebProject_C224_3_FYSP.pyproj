@@ -30,10 +30,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.py" />
-    <Compile Include="beam_search_spanning_tree.py">
+    <Compile Include="logics\beam_utils.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="bfs_spanning_tree.py">
+    <Compile Include="methods\beam_search_spanning_tree.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="methods\bfs_spanning_tree.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="routes.py" />
@@ -42,6 +45,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="methods\" />
+    <Folder Include="logics\" />
     <Folder Include="static\dynamic\" />
     <Folder Include="static\dynamic\images\" />
     <Folder Include="static\dynamic\logos\" />

@@ -2,24 +2,6 @@
 Updated routes module to include the new sections.
 """
 
-import os
-import re
-import json
-from datetime import datetime
-from bottle import route, view, request, redirect, response, template, static_file
-from theory_algorithm import get_theory
-from beam_search_spanning_tree import beam_search_spanning_tree
-from graph_coloring_algorithm import greedy_graph_coloring, draw_colored_graph
-import matplotlib.pyplot as plt
-import matplotlib.colors
-
-@route('/')
-@route('/home')
-@view('index')
-def home():
-    """Renders the home page."""
-    return dict(year=datetime.now().year)
-
 # routes.py
 import os
 import re
@@ -27,9 +9,9 @@ import json
 from datetime import datetime
 from bottle import route, view, request, redirect, response, template, static_file
 from theory_algorithm import get_theory
-from beam_search_spanning_tree import beam_search_spanning_tree
-from graph_coloring_algorithm import greedy_graph_coloring, draw_colored_graph
-from bfs_spanning_tree import bfs_spanning_tree, draw_bfs_graph
+from methods.graph_coloring_algorithm import greedy_graph_coloring, draw_colored_graph
+from methods.bfs_spanning_tree import bfs_spanning_tree, draw_bfs_graph
+from logics.beam_utils import get_data
 import matplotlib.pyplot as plt
 import matplotlib.colors
 
@@ -147,43 +129,7 @@ def section2():
 def beam():
     result = None
     result_is_error = False
-    form_data = {'n': '', 'adjacency': [], 'weights': []}
-
-    if request.method == 'POST':
-        try:
-            n = int(request.forms.get('n'))
-            form_data['n'] = str(n)
-
-            adjacency = []
-            for i in range(n):
-                row = []
-                for j in range(n):
-                    key = f'adjacency_{i}_{j}'
-                    value = int(request.forms.get(key, 0))
-                    row.append(value)
-                adjacency.append(row)
-            form_data['adjacency'] = adjacency
-          
-            weights = []
-            for i in range(n):
-                row = []
-                for j in range(n):
-                    key = f'weights_{i}_{j}'
-                    value = int(request.forms.get(key, 0))
-                    row.append(value)
-                weights.append(row)
-            form_data['weights'] = weights
-
-            start = 0
-            beam_width = 2
-
-            tree_result = beam_search_spanning_tree(n, adjacency, weights, start, beam_width)
-            result_is_error = isinstance(tree_result, str)
-            result = tree_result
-
-        except Exception as e:
-            result = f"Error: {e}"
-            result_is_error = True
+    form_data, result, result_is_error = get_data(request)
 
     theory_text = get_theory('static/theory/theory_beam_search.md')
 
