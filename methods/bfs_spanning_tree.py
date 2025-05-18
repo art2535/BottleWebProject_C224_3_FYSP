@@ -35,37 +35,44 @@ def bfs_spanning_tree(num_vertices, adjacency_matrix, start_vertex):
 def draw_bfs_graph(result_matrix, adjacency_matrix, num_vertices):
     """Draws the graph with the spanning tree highlighted and saves it."""
     G = nx.Graph()
-    for i in range(num_vertices):
+
+    # Создаём вершины от 1 до num_vertices
+    for i in range(1, num_vertices + 1):
         G.add_node(i)
 
-    # Add all edges from adjacency matrix
+    # Добавляем все рёбра из adjacency_matrix, сдвигая индексы на +1
     all_edges = []
     for i in range(num_vertices):
         for j in range(i + 1, num_vertices):
             if adjacency_matrix[i][j] == 1:
-                all_edges.append((i, j))
+                all_edges.append((i + 1, j + 1))
 
-    # Add spanning tree edges from result matrix
+    # Добавляем рёбра остовного дерева
     tree_edges = []
     if result_matrix:
         for i in range(num_vertices):
             for j in range(i + 1, num_vertices):
                 if result_matrix[i][j] == 1:
-                    tree_edges.append((i, j))
+                    tree_edges.append((i + 1, j + 1))
 
-    # Draw the graph
     pos = nx.spring_layout(G, seed=42)
     plt.figure(figsize=(6, 6))
+
+    # Отрисовка всех рёбер
     nx.draw_networkx_edges(G, pos, edgelist=all_edges, edge_color='gray', width=1.5)
+
+    # Отрисовка рёбер остовного дерева
     if result_matrix:
         nx.draw_networkx_edges(G, pos, edgelist=tree_edges, edge_color='red', width=2.5)
+
+    # Отрисовка узлов и меток
     nx.draw_networkx_nodes(G, pos, node_color='lightblue', node_size=1000)
-    nx.draw_networkx_labels(G, pos, font_size=14)
+    labels = {i: str(i) for i in G.nodes}
+    nx.draw_networkx_labels(G, pos, labels=labels, font_size=14)
+
     plt.title("Spanning Tree (red edges)")
     plt.tight_layout()
-
-    # Save the image
-    static_path = 'static/dynamic/graphs/bfs_spanning_tree.png'
+    static_path = 'static/dynamic/graphs/spanning_tree.png'
     os.makedirs(os.path.dirname(static_path), exist_ok=True)
     plt.savefig(static_path)
     plt.close()

@@ -33,6 +33,9 @@
     <Compile Include="logics\beam_utils.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="logics\bfs_utils.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="methods\beam_search_spanning_tree.py">
       <SubType>Code</SubType>
     </Compile>

@@ -53,21 +53,25 @@ def beam_search_spanning_tree(n, adjacency_matrix, weight_matrix, start=0, beam_
 
 def draw_graph(result_matrix, adjacency_matrix, weight_matrix, n):
     G = nx.Graph()
-    for i in range(n):
+
+    # Добавляем вершины от 1 до n
+    for i in range(1, n + 1):
         G.add_node(i)
 
+    # Все рёбра из adjacency_matrix
     all_edges = []
     for i in range(n):
         for j in range(i + 1, n):
             if adjacency_matrix[i][j]:
-                all_edges.append((i, j))
+                all_edges.append((i + 1, j + 1))  # сдвиг на +1
 
+    # Рёбра остовного дерева
     tree_edges = []
     if result_matrix:
         for i in range(n):
             for j in range(i + 1, n):
                 if result_matrix[i][j]:
-                    tree_edges.append((i, j))
+                    tree_edges.append((i + 1, j + 1))  # сдвиг на +1
 
     pos = nx.spring_layout(G, seed=42)
     plt.figure(figsize=(6, 6))
@@ -77,11 +81,11 @@ def draw_graph(result_matrix, adjacency_matrix, weight_matrix, n):
 
     nx.draw_networkx_nodes(G, pos, node_color='lightblue', node_size=1000)
     nx.draw_networkx_labels(G, pos, font_size=14)
+
     plt.title("Spanning Tree (red edges)")
     plt.tight_layout()
-
     static_path = 'static/dynamic/graphs/spanning_tree.png'
     os.makedirs(os.path.dirname(static_path), exist_ok=True)
-
     plt.savefig(static_path)
     plt.close()
+
