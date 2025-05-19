@@ -70,14 +70,15 @@
                             <h3>Adjacency Matrix of Vertices</h3>
                             <table class="compact-matrix" id="matrixTable">
                                 <tr>
-                                    <td></td>
+                                    <td class="matrix-header"></td>
                                     % for i in range(vertices):
-                                        <td>{{i + 1}}</td>
+                                        <td class="matrix-header">{{i + 1}}</td>
                                     % end
                                 </tr>
+
                                 % for i in range(vertices):
                                     <tr>
-                                        <td>{{i + 1}}</td>
+                                        <td class="matrix-header">{{i + 1}}</td>
                                         % for j in range(vertices):
                                             <td>
                                                 <input type="number" name="edge_{{i + 1}}_{{j + 1}}" 
@@ -86,6 +87,7 @@
                                         % end
                                     </tr>
                                 % end
+
                             </table>
                         </div>
                     </form>
@@ -110,19 +112,24 @@
                             <h3>Matrix of the Resulting Tree</h3>
                             <table class="compact-matrix-ready">
                                 <tr>
-                                    <td></td>
+                                    <td class="matrix-header"></td>
                                     % for i in range(vertices):
-                                        <td>{{i + 1}}</td>
+                                        <td class="matrix-header">{{i + 1}}</td>
                                     % end
                                 </tr>
+
                                 % for i in range(vertices):
                                     <tr>
-                                        <td>{{i + 1}}</td>
+                                        <td class="matrix-header">{{i + 1}}</td>
                                         % for j in range(vertices):
-                                            <td>{{tree_matrix[i][j]}}</td>
+                                            <td>
+                                                <input type="number" name="edge_{{i + 1}}_{{j + 1}}" 
+                                                       min="0" max="1" value="{{adj_matrix[i][j]}}">
+                                            </td>
                                         % end
                                     </tr>
                                 % end
+
                             </table>
                             <p><strong>Vertices from which the spanning tree was obtained:</strong> 
                                {{', '.join(map(str, vertices_list))}}</p>
@@ -135,40 +142,5 @@
 
     <!-- External JavaScript for interactivity -->
     <script src="/static/scripts/work-elements.js"></script>
-    <script>
-
-
-function updateMatrix() {
-    const vertices = parseInt(document.getElementById('vertices').value) || 3;
-    if (vertices < 1 || vertices > 8) return;
-
-    const table = document.getElementById('matrixTable');
-    table.innerHTML = '';
-
-    
-    let header = '<tr><td></td>';
-    for (let i = 1; i <= vertices; i++) {
-        header += `<td>${i}</td>`;  
-    }
-    header += '</tr>';
-    table.innerHTML += header;
-
-    
-    for (let i = 0; i < vertices; i++) {
-        let row = `<tr><td>${i + 1}</td>`;  
-        for (let j = 0; j < vertices; j++) {
-            row += `<td><input type="number" name="edge_${i + 1}_${j + 1}" min="0" max="1" value="0"></td>`;
-        }
-        row += '</tr>';
-        table.innerHTML += row;
-    }
-}
-
-
-function resetForm() {
-    document.getElementById('dfsForm').reset();
-    updateMatrix();
-}
-</script>
 </body>
 </html>

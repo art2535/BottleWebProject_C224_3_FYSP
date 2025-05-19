@@ -183,8 +183,7 @@ h3 {
     width: auto;
     border-collapse: collapse;
     text-align: center;
-    margin-bottom: 20px;
-    margin-left: 50px;
+    margin: 0 auto 20px auto;
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -673,4 +672,14 @@ label {
     text-align: center;
     margin: 10px 0;
     font-weight: bold;
+}
+
+.matrix-header {
+    background-color: #d6e4f0;
+    font-weight: bold;
+    font-size: 16px !important;
+    color: #000;
+    text-align: center;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
 }
