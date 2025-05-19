@@ -19,6 +19,10 @@
     <Name>BottleWebProject_C224_3_FYSP</Name>
     <RootNamespace>BottleWebProject_C224_3_FYSP</RootNamespace>
     <InterpreterId>MSBuild|env3.11|$(MSBuildProjectFullPath)</InterpreterId>
+    <TestFramework>unittest</TestFramework>
+    <UnitTestPattern>test*.py</UnitTestPattern>
+    <UnitTestRootDirectory>tests/</UnitTestRootDirectory>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,6 +53,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="routes.py" />
+    <Compile Include="tests\test_beam_search.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="theory_algorithm.py">
       <SubType>Code</SubType>
     </Compile>
@@ -56,6 +63,7 @@
   <ItemGroup>
     <Folder Include="methods\" />
     <Folder Include="logics\" />
+    <Folder Include="tests\" />
     <Folder Include="static\dynamic\" />
     <Folder Include="static\dynamic\images\" />
     <Folder Include="static\dynamic\logos\" />
