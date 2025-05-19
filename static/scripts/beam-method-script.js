@@ -29,7 +29,7 @@ function updateMatrixTables(n, preserveValues = false) {
     adjacencyTable.innerHTML = '';
     weightsTable.innerHTML = '';
 
-    // Check if n is within the valid range (3–7)
+    // Check if n is within the valid range (3ï¿½7)
     if (n >= 3 && n <= 7) {
         // Create header rows (horizontal numbering)
         let headerRowAdj = document.createElement('tr');
