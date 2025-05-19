@@ -70,7 +70,7 @@
                             <div class="input-item">
                                 <label for="num_vertices">Number of Vertices:</label>
                                 <input type="number" id="num_vertices" name="num_vertices" class="input-field"
-                                       value="{{ form_data.get('num_vertices', 3) }}" min="1" onchange="updateMatrixTable(this.value)">
+                                    value="{{ form_data.get('num_vertices', 3) }}" min="1" max="8" onchange="updateMatrixTable(this.value)">
                             </div>
 
                             <div class="input-item">
@@ -87,9 +87,9 @@
                                 % if form_data.get('num_vertices') and form_data.get('adjacency_matrix'):
                                     <!-- Заголовок таблицы -->
                                     <tr>
-                                        <td></td>
+                                        <td class="matrix-header"></td>
                                         % for j in range(int(form_data['num_vertices'])):
-                                            <td>{{ j + 1 }}</td>
+                                            <td class="matrix-header">{{ j + 1 }}</td>
                                         % end
                                     </tr>
                                     % for i in range(int(form_data['num_vertices'])):
@@ -127,9 +127,9 @@
                             <h3>Matrix of the Resulting Tree</h3>
                             <table class="compact-matrix-ready">
                                 <tr>
-                                    <td></td>
+                                    <td class="matrix-header"></td>
                                     % for i in range(int(form_data['num_vertices'])):
-                                        <td>{{ i + 1 }}</td>
+                                        <td class="matrix-header">{{ i + 1 }}</td>
                                     % end
                                 </tr>
                                 % for i in range(int(form_data['num_vertices'])):
