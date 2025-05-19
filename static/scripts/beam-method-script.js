@@ -1,26 +1,49 @@
-// Функция для переключения отображения блока с теорией (показать/скрыть)
+// Функция для переключения отображения блока с теорией
 function toggleTheory() {
     const content = document.getElementById('theoryContent');
     content.style.display = content.style.display === 'none' ? 'block' : 'none';
 }
 
-// Функция для динамического обновления таблиц смежности и весов в зависимости от числа вершин
+// Функция для динамического обновления таблиц смежности и весов
 function updateMatrixTables(n) {
     const adjacencyTable = document.getElementById('adjacency-table');
     const weightsTable = document.getElementById('weights-table');
 
-    // Очищаем старые таблицы
+    // Очищаем таблицы
     adjacencyTable.innerHTML = '';
     weightsTable.innerHTML = '';
 
-    // Проверяем допустимое значение n (число вершин)
-    if (n >= 3 && n <= 6) {
+    // Проверяем допустимое значение n (3–7)
+    if (n >= 3 && n <= 7) {
+        // Создаём шапку (горизонтальная нумерация)
+        let headerRowAdj = document.createElement('tr');
+        let headerRowWgt = document.createElement('tr');
+        headerRowAdj.appendChild(document.createElement('th')); // Пустая угловая ячейка
+        headerRowWgt.appendChild(document.createElement('th'));
+        for (let j = 0; j < n; j++) {
+            let thAdj = document.createElement('th');
+            let thWgt = document.createElement('th');
+            thAdj.textContent = j + 1;
+            thWgt.textContent = j + 1;
+            headerRowAdj.appendChild(thAdj);
+            headerRowWgt.appendChild(thWgt);
+        }
+        adjacencyTable.appendChild(headerRowAdj);
+        weightsTable.appendChild(headerRowWgt);
+
+        // Создаём строки с вертикальной нумерацией
         for (let i = 0; i < n; i++) {
-            let adjRow = document.createElement('tr');     // Строка таблицы смежности
-            let weightRow = document.createElement('tr');  // Строка таблицы весов
+            let adjRow = document.createElement('tr');
+            let weightRow = document.createElement('tr');
+            let thAdj = document.createElement('th');
+            let thWgt = document.createElement('th');
+            thAdj.textContent = i + 1;
+            thWgt.textContent = i + 1;
+            adjRow.appendChild(thAdj);
+            weightRow.appendChild(thWgt);
 
             for (let j = 0; j < n; j++) {
-                // Создание ячейки и поля ввода для матрицы смежности
+                // Матрица смежности
                 let adjCell = document.createElement('td');
                 let adjInput = document.createElement('input');
                 adjInput.type = 'number';
@@ -28,41 +51,36 @@ function updateMatrixTables(n) {
                 adjInput.min = '0';
                 adjInput.max = '1';
                 adjInput.required = true;
+                adjInput.value = '0';
                 adjCell.appendChild(adjInput);
                 adjRow.appendChild(adjCell);
 
-                // Создание ячейки и поля ввода для матрицы весов
+                // Матрица весов
                 let weightCell = document.createElement('td');
                 let weightInput = document.createElement('input');
                 weightInput.type = 'number';
                 weightInput.name = `weights_${i}_${j}`;
                 weightInput.min = '0';
                 weightInput.required = true;
+                weightInput.value = '0';
                 weightCell.appendChild(weightInput);
                 weightRow.appendChild(weightCell);
             }
-
-            // Добавляем строки в таблицы
             adjacencyTable.appendChild(adjRow);
             weightsTable.appendChild(weightRow);
         }
     }
 }
 
-// Генерация случайных значений для матриц смежности и весов
+// Генерация случайных значений для матриц
 function generateRandomMatrices() {
     const n = parseInt(document.getElementById('n-vertices').value);
-
-    // Проверка корректности числа вершин
-    if (isNaN(n) || n < 3 || n > 6) {
-        alert('Please enter a valid number of vertices (at least 3).');
+    if (isNaN(n) || n < 3 || n > 7) {
+        alert('Please enter a valid number of vertices (from 3 to 7).');
         return;
     }
 
-    // Создание структуры таблиц
     updateMatrixTables(n);
-
-    // Заполнение ячеек случайными значениями: 0 или 1 для смежности, 0–9 для весов
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
             document.querySelector(`input[name="adjacency_${i}_${j}"]`).value = Math.floor(Math.random() * 2);
@@ -73,31 +91,22 @@ function generateRandomMatrices() {
 
 // Очистка формы и таблиц
 function clearFields() {
-    // Сброс всех полей формы
     document.getElementById('matrix-form').reset();
-    // Удаление таблиц
     updateMatrixTables(0);
 }
 
-// Слушатель событий: при изменении числа вершин обновляем таблицы
+// Слушатель для обновления таблиц при изменении числа вершин
 document.getElementById('n-vertices').addEventListener('input', function () {
     const n = parseInt(this.value);
-    if (!isNaN(n) && n >= 3 && n <= 6) {
+    if (!isNaN(n) && n >= 3 && n <= 7) {
         updateMatrixTables(n);
     } else {
-        updateMatrixTables(0); // При некорректном значении очищаем таблицы
+        updateMatrixTables(3); // По умолчанию 3x3
     }
 });
 
-// При загрузке страницы автоматически создаём таблицы, если данные не были восстановлены
+// Инициализация при загрузке
 document.addEventListener('DOMContentLoaded', function () {
-    const n = parseInt(document.getElementById('n-vertices').value);
-
-    // Проверка: если таблицы не созданы, но значение n есть — создаём их
-    const adjInputs = document.querySelectorAll('input[name^="adjacency_"]');
-    const weightInputs = document.querySelectorAll('input[name^="weights_"]');
-
-    if ((adjInputs.length === 0 || weightInputs.length === 0) && !isNaN(n) && n >= 3 && n <= 6) {
-        updateMatrixTables(n);
-    }
+    const n = parseInt(document.getElementById('n-vertices').value) || 3;
+    updateMatrixTables(n);
 });
