@@ -149,7 +149,7 @@ section.card {
 
 /* Adjacency matrix */
 .adjacency-matrix {
-    width: 70%;
+    width: 100%;
     margin: 40px auto;
     display: flex;
     flex-direction: column;
@@ -372,8 +372,8 @@ input[type="number"] {
 
 /* Form container */
 .form-container {
-    width: 644px;
-    height: 590px;
+    width: 560px;
+    height: 610px;
     padding: 20px;
     margin-right: 2%;
     margin-top: -15px;
