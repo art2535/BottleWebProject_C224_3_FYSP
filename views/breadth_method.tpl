@@ -36,7 +36,7 @@
 
         <!-- Кнопка-секция для разворачивания/сворачивания теории -->
         <div class="toggle-arrow" onclick="toggleTheory()">
-            <span class="arrow">&#x25BC;</span>
+            <span class="arrow">▼</span>
         </div>
 
         <!-- Раздел с практической частью -->
@@ -70,13 +70,13 @@
                             <div class="input-item">
                                 <label for="num_vertices">Number of Vertices:</label>
                                 <input type="number" id="num_vertices" name="num_vertices" class="input-field"
-                                       value="{{ form_data.get('num_vertices', 3) }}" min="1" onchange="updateAdjacencyMatrixTable()">
+                                       value="{{ form_data.get('num_vertices', 3) }}" min="1" onchange="updateMatrixTable(this.value)">
                             </div>
 
                             <div class="input-item">
                                 <label for="start_vertex">Starting Vertex:</label>
                                 <input type="number" id="start_vertex" name="start_vertex" class="input-field"
-                                       value="{{ form_data.get('start_vertex', 0) }}" min="0">
+                                       value="{{ form_data.get('start_vertex', 1) }}" min="1">
                             </div>
                         </div>
 
@@ -85,8 +85,16 @@
                             <h3>Adjacency Matrix (0 or 1)</h3>
                             <table class="compact-matrix" id="adjacency-table">
                                 % if form_data.get('num_vertices') and form_data.get('adjacency_matrix'):
+                                    <!-- Заголовок таблицы -->
+                                    <tr>
+                                        <td></td>
+                                        % for j in range(int(form_data['num_vertices'])):
+                                            <td>{{ j + 1 }}</td>
+                                        % end
+                                    </tr>
                                     % for i in range(int(form_data['num_vertices'])):
                                         <tr>
+                                            <td>{{ i + 1 }}</td>
                                             % for j in range(int(form_data['num_vertices'])):
                                                 <td>
                                                     <input type="number" name="edge_{{ i }}_{{ j }}"
@@ -121,12 +129,12 @@
                                 <tr>
                                     <td></td>
                                     % for i in range(int(form_data['num_vertices'])):
-                                        <td>{{ i }}</td>
+                                        <td>{{ i + 1 }}</td>
                                     % end
                                 </tr>
                                 % for i in range(int(form_data['num_vertices'])):
                                     <tr>
-                                        <td>{{ i }}</td>
+                                        <td>{{ i + 1 }}</td>
                                         % for j in range(int(form_data['num_vertices'])):
                                             <td>{{ result_matrix[i][j] }}</td>
                                         % end

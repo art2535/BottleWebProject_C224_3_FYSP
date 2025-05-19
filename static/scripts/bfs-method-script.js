@@ -12,23 +12,23 @@ function updateMatrixTable(n) {
     adjacencyTable.innerHTML = '';
 
     if (n >= 1) {
-        // Создаём заголовок таблицы с номерами столбцов
+        // Создаём заголовок таблицы с номерами столбцов (1-based)
         let headerRow = document.createElement('tr');
         headerRow.innerHTML = '<td></td>';
         for (let j = 0; j < n; j++) {
-            headerRow.innerHTML += `<td>${j}</td>`;
+            headerRow.innerHTML += `<td>${j + 1}</td>`;
         }
         adjacencyTable.appendChild(headerRow);
 
-        // Создаём строки таблицы с инпутами для ввода рёбер
+        // Создаём строки таблицы с инпутами для ввода рёбер (1-based для отображения)
         for (let i = 0; i < n; i++) {
             let row = document.createElement('tr');
-            row.innerHTML = `<td>${i}</td>`;
+            row.innerHTML = `<td>${i + 1}</td>`;
             for (let j = 0; j < n; j++) {
                 let cell = document.createElement('td');
                 let input = document.createElement('input');
                 input.type = 'number';
-                input.name = `edge_${i}_${j}`;
+                input.name = `edge_${i}_${j}`; // 0-based для backend
                 input.min = '0';
                 input.max = '1';
                 input.value = '0';
@@ -39,10 +39,10 @@ function updateMatrixTable(n) {
             adjacencyTable.appendChild(row);
         }
 
-        // Обновляем стартовую вершину, если она выходит за пределы
+        // Обновляем стартовую вершину: устанавливаем 1, если выходит за пределы или меньше 1
         const startVertexInput = document.getElementById('start_vertex');
-        if (parseInt(startVertexInput.value) >= n) {
-            startVertexInput.value = '0';
+        if (isNaN(parseInt(startVertexInput.value)) || parseInt(startVertexInput.value) < 1 || parseInt(startVertexInput.value) > n) {
+            startVertexInput.value = '1';
         }
     }
 }
@@ -74,7 +74,9 @@ function clearFields() {
     const form = document.getElementById('graphForm');
     form.reset();
     const numVerticesInput = document.getElementById('num_vertices');
+    const startVertexInput = document.getElementById('start_vertex');
     numVerticesInput.value = '3';
+    startVertexInput.value = '1';
     updateMatrixTable(3);
 }
 
