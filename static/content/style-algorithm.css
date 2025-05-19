@@ -1,4 +1,40 @@
-/* Card style for BFS with background color, padding, rounded corners, and centered alignment */
+/* Body style for general page layout */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fc;
+}
+
+/* Header style */
+header {
+    background-color: #598CC1;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin: 10px 0 20px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Style for h1 */
+h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+/* Heading style for h3 */
+h3 {
+    text-align: center;
+    margin: 10px 0 20px 0;
+    white-space: normal;
+    font-size: 1.9em;
+    color: black;
+}
+
+/* Card styles for BFS, DFS, BM, and GR */
 .card-bfs {
     background-color: #456c95;
     padding: 30px;
@@ -10,7 +46,6 @@
     margin-right: auto;
 }
 
-/* Card style for DFS with different background color, padding, rounded corners, and centered alignment */
 .card-dfs {
     background-color: #7f9fba;
     padding: 30px;
@@ -22,7 +57,6 @@
     margin-right: auto;
 }
 
-/* Card style for BM with another background color, padding, rounded corners, and centered alignment */
 .card-bm {
     background-color: #6e97a0;
     padding: 30px;
@@ -34,7 +68,6 @@
     margin-right: auto;
 }
 
-/* Card style for GR with another background color, padding, rounded corners, and centered alignment */
 .card-gr {
     background-color: #6c868e;
     padding: 30px;
@@ -46,35 +79,7 @@
     margin-right: auto;
 }
 
-/* Body style for general page layout with a font family, line height, and background color */
-body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f7fc;
-}
-
-/* Header style with background color, padding, centered text, and rounded corners */
-header {
-    background-color: #598CC1;
-    color: #fff;
-    padding: 20px 20px;
-    text-align: center;
-    border-radius: 8px;
-    margin: 0;
-    width: 100%;
-    box-sizing: border-box;
-    margin: 10px 0 20px 0;
-}
-
-/* Style for h1 with no margin and a larger font size */
-h1 {
-    margin: 0;
-    font-size: 2.5em;
-}
-
-/* Section style for cards with white background, padding, rounded corners, and subtle shadow */
+/* Section style for cards */
 section.card {
     background-color: #fff;
     padding: 20px;
@@ -84,7 +89,7 @@ section.card {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Header style for DFS sections with specific background color and centered text */
+/* Header styles for DFS, BFS, BM, and GR sections */
 .h2-dfs {
     background-color: #9fc6e7;
     color: #fff;
@@ -96,7 +101,6 @@ section.card {
     box-sizing: border-box;
 }
 
-/* Header style for BFS sections with a different background color and centered text */
 .h2-bfs {
     background-color: #598cc1;
     color: #fff;
@@ -108,7 +112,6 @@ section.card {
     box-sizing: border-box;
 }
 
-/* Header style for BM sections with another background color and centered text */
 .h2-bm {
     background-color: #8ec6d3;
     color: #fff;
@@ -120,7 +123,6 @@ section.card {
     box-sizing: border-box;
 }
 
-/* Header style for GR sections with a unique background color and centered text */
 .h2-gr {
     background-color: #8fb3bd;
     color: #fff;
@@ -132,41 +134,55 @@ section.card {
     box-sizing: border-box;
 }
 
-/* Style for the practical application section with top margin */
+/* Practical application section */
 .practical-application {
     margin-top: 20px;
 }
 
-/* Style for the graph section with space between items */
+/* Graph section */
 .graph-section {
     display: flex;
     justify-content: space-between;
     gap: 30px;
+    margin-top: 20px;
 }
 
-/* Style for adjacency matrix and graph plot with width adjustments and top margin */
+/* Adjacency matrix */
+.adjacency-matrix {
+    width: 70%;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .adjacency-matrix h3,
+    .tree-matrix h3 {
+        text-align: center;
+        margin: 0 0 10px 0;
+        font-size: 1.6em;
+        color: black;
+    }
+
+/* Graph plot */
 .graph-plot {
     width: 70%;
     margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.adjacency-matrix {
-    width: 70%; /* Ширина блока */
-    margin-top: 40px; /* Отступ сверху */
-    margin-left: auto; /* Центрирование блока по горизонтали */
-    margin-right: auto; /* Центрирование блока по горизонтали */
-}
+    .graph-plot img {
+        max-width: 500px;
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
 
-/* Heading style for h3 with centered text and margin adjustments */
-h3 {
-    text-align: center;
-    margin: 10px 0 20px 0;
-    white-space: normal;
-    font-size: 1.9em;
-    color: black;
-}
-
-/* Style for card content with top padding and left border */
+/* Card content */
 .card-content {
     padding-top: 0;
     font-size: 16px;
@@ -176,9 +192,7 @@ h3 {
     margin-top: -20px;
 }
 
-
-
-/* Style for compact matrix ready state with additional left margin */
+/* Compact matrix ready state */
 .compact-matrix-ready {
     width: auto;
     border-collapse: collapse;
@@ -189,8 +203,7 @@ h3 {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-    /* Styling for compact matrix cells with padding, border, and font size */
-    .compact-matrix-ready td{
+    .compact-matrix-ready td {
         padding: 4px;
         border: 1px solid #ddd;
         font-size: 12px;
@@ -200,12 +213,10 @@ h3 {
         color: black;
     }
 
-
-
-
-/* Style for compact matrix with collapsed borders, centered text, and shadow */
+/* Compact matrix */
 .compact-matrix {
     width: auto;
+    max-width: 100%;
     border-collapse: collapse;
     text-align: center;
     margin: 0 auto;
@@ -214,7 +225,6 @@ h3 {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-    /* Table cells */
     .compact-matrix td {
         padding: 4px;
         border: 1px solid #ddd;
@@ -225,7 +235,18 @@ h3 {
         height: auto;
     }
 
-    /* Input fields inside the table */
+    .compact-matrix th {
+        padding: 4px;
+        border: 1px solid #ddd;
+        font-size: 12px;
+        text-align: center;
+        color: black;
+        background-color: #f2f2f2;
+        font-weight: 600;
+        min-width: 50px;
+        height: auto;
+    }
+
     .compact-matrix input {
         width: 100%;
         height: 100%;
@@ -240,7 +261,7 @@ h3 {
         transition: background-color 0.3s ease, border-color 0.3s ease;
     }
 
-/* Styles for input[type="number"] */
+/* Input number styles */
 input[type="number"] {
     width: 100%;
     height: 100%;
@@ -253,124 +274,31 @@ input[type="number"] {
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-    /* Focus for input */
     input[type="number"]:focus {
         background-color: #eaf7e5;
         border-color: #4CAF50;
         outline: none;
     }
 
+    input[type="number"].persistent {
+        background-color: #e6f3ff;
+        border-color: #3498db;
+    }
 
-
-
-/* Tree matrix with top margin */
+/* Tree matrix */
 .tree-matrix {
-    margin-top: 15px;
+    width: auto;
+    margin: 15px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-    /* Style for tree matrix table with adjusted top margin */
     .tree-matrix table {
-        margin-top: 0px;
+        margin-top: 0;
     }
 
-/* Style for strong text with dark color */
-strong {
-    color: #333;
-}
-
-/* Style for paragraphs with black color */
-p {
-    color: black;
-}
-
-/* Expandable card with transition effect for expanding and padding */
-.expandable-card {
-    position: relative;
-    max-width: 1000px;
-    max-height: 100px;
-    overflow: hidden;
-    transition: max-height 0.5s ease;
-    padding-bottom: 40px;
-}
-
-    /* Expanded state for the expandable card with no height limit */
-    .expandable-card.expanded {
-        max-height: 10000px;
-    }
-
-/* Style for the expand toggle button with circular shape and centered text */
-.expand-toggle {
-    position: absolute;
-    left: 50%;
-    margin-top: -15px;
-    transform: translateX(-50%);
-    background-color: #007BFF;
-    color: white;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 30px;
-    cursor: pointer;
-    font-size: 18px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    user-select: none;
-    transition: transform 0.3s ease;
-}
-
-/* Expanded state of the toggle button with rotation */
-.expandable-card.expanded .expand-toggle {
-    transform: translateX(-50%) rotate(180deg);
-}
-
-/* Style for graph card with background, padding, rounded corners, and centered content */
-.graph-card {
-    background-color: #f8f8ff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    width: 38%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-    /* Heading style for graph cards with margin and padding */
-    .graph-card h3 {
-        margin: 0;
-        padding-bottom: 10px;
-    }
-
-
-/* Style for graph plot with full width, centered content, and vertical layout */
-.graph-plot {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: -5px;
-}
-
-    /* Style for image inside graph plot with max width, centered alignment, and automatic height */
-    .graph-plot img {
-        max-width: 500px;
-        width: 100%;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-    }
-
-/* Style for graph section with spaced items and top margin */
-.graph-section {
-    display: flex;
-    justify-content: space-between;
-    gap: 5px;
-    margin-top: 20px;
-}
-
-/* Style for matrix card with background, padding, shadow, and centered content */
+/* Matrix card */
 .matrix-card {
     background-color: #f8f8ff;
     padding: 20px;
@@ -382,15 +310,35 @@ p {
     align-items: center;
     justify-content: flex-start;
     margin-right: 2%;
+    overflow-x: auto;
 }
 
-    /* Style for matrix card heading with centered text and bottom margin */
     .matrix-card h3 {
         text-align: center;
         margin-bottom: 20px;
     }
 
-/* Style for controls with flex layout, wrapping, and spacing between items */
+/* Graph card */
+.graph-card {
+    background-color: #f8f8ff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 38%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    overflow-x: auto;
+}
+
+    .graph-card h3 {
+        margin: 0;
+        padding-bottom: 10px;
+    }
+
+/* Controls */
 .controls {
     display: flex;
     flex-wrap: nowrap;
@@ -401,7 +349,7 @@ p {
     max-width: 100%;
 }
 
-/* Style for button with padding, background, transition effect, and centered text */
+/* Button */
 .btn {
     flex: 1 1 auto;
     white-space: nowrap;
@@ -415,23 +363,23 @@ p {
     transition: background-color 0.3s;
     text-align: center;
     height: 40px;
-    width: 250px;
+    max-width: 250px;
 }
 
-    /* Hover effect for button with darker background color */
     .btn:hover {
         background-color: #4b79a1;
     }
 
+/* Form container */
 .form-container {
-    width: 644px; /* Устанавливаем ту же ширину, что и у matrix-card */
-    height: 590px; /* Устанавливаем ту же высоту, что и у matrix-card */
-    padding: 20px; /* Сохраняем отступы */
-    margin-right: 2%; /* Сохраняем отступ справа */
+    width: 644px;
+    height: 590px;
+    padding: 20px;
+    margin-right: 2%;
     margin-top: -15px;
 }
 
-/* Style for input group with flex layout and space between input items */
+/* Input group */
 .input-group {
     display: flex;
     justify-content: center;
@@ -439,7 +387,7 @@ p {
     margin-top: 20px;
 }
 
-/* Style for individual input items with column layout, centered text, and margin */
+/* Input item */
 .input-item {
     display: flex;
     flex-direction: column;
@@ -449,9 +397,7 @@ p {
     color: black;
 }
 
-
-
-/* Focus effect for number input fields with background color and border change */
+/* Input field */
 .input-group .input-field {
     width: 80px;
     height: 50px;
@@ -465,21 +411,20 @@ p {
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-    /* Focus effect for input fields inside input group with different background and border */
     .input-group .input-field:focus {
         background-color: #eaf7e5;
         border-color: #4CAF50;
         outline: none;
     }
 
-/* Label style for inputs with font size and bottom margin */
+/* Label */
 label {
     font-size: 16px;
     margin-bottom: 5px;
     color: #333;
 }
 
-/* Style for theory block with background color, left border, and padding */
+/* Theory block */
 .theory-block {
     background-color: #f8f8ff;
     border-left: 6px solid #3498db;
@@ -490,7 +435,6 @@ label {
     color: black;
 }
 
-    /* Style for summary in theory block with padding, font weight, and cursor pointer */
     .theory-block summary {
         padding: 15px 0;
         font-weight: 600;
@@ -498,24 +442,19 @@ label {
         color: #2c3e50;
         cursor: pointer;
         list-style: none;
-        color: black;
     }
 
-    /* Style for open theory block summary with border and margin */
     .theory-block[open] summary {
         border-bottom: 1px solid #d1d5db;
         margin-bottom: 15px;
-        color: black;
     }
 
-    /* Style for paragraph in theory block with margin and font size */
     .theory-block p {
         margin: 0 0 15px 0;
         font-size: 12px;
         color: #34495e;
     }
 
-    /* Header styles for theory block (h1, h2, etc.) with color and margin */
     .theory-block h1,
     .theory-block h2,
     .theory-block h3,
@@ -528,7 +467,6 @@ label {
         font-size: 17px;
     }
 
-    /* Style for ordered and unordered lists inside theory block with margin and padding */
     .theory-block ul,
     .theory-block ol {
         margin: 15px 0;
@@ -536,26 +474,22 @@ label {
         color: black;
     }
 
-    /* Style for list items inside theory block with margin and font size */
     .theory-block li {
         margin-bottom: 8px;
         font-size: 14px;
         color: black;
     }
 
-    /* Style for strong text inside theory block with bold weight */
     .theory-block strong {
         font-weight: 700;
         color: black;
     }
 
-    /* Style for italic text inside theory block */
     .theory-block em {
         font-style: italic;
         color: black;
     }
 
-    /* Style for code blocks inside theory block with background and padding */
     .theory-block code {
         background-color: #f1f3f5;
         padding: 2px 6px;
@@ -565,7 +499,6 @@ label {
         color: black;
     }
 
-    /* Style for preformatted text in theory block with background, padding, and font styles */
     .theory-block pre {
         background-color: #f1f3f5;
         padding: 15px;
@@ -577,7 +510,7 @@ label {
         color: black;
     }
 
-/* Style for theory container with background, left border, and padding */
+/* Theory container */
 .theory-container {
     background-color: #ffffff;
     border-left: 6px solid #3498db;
@@ -589,7 +522,7 @@ label {
     color: black;
 }
 
-/* Style for theory header with padding and font styles */
+/* Theory header */
 .theory-header {
     padding: 15px 0;
     font-weight: 600;
@@ -597,7 +530,7 @@ label {
     color: #2c3e50;
 }
 
-/* Style for toggle arrow with position, background color, and hover effect */
+/* Toggle arrow */
 .toggle-arrow {
     position: relative;
     left: 50%;
@@ -617,28 +550,24 @@ label {
     transition: background-color 0.3s ease;
 }
 
-    /* Hover effect for toggle arrow */
     .toggle-arrow:hover {
         background-color: rgba(128, 128, 128, 0.8);
     }
 
-    /* Active state for toggle arrow with different background color */
     .toggle-arrow:active {
         background-color: rgba(128, 128, 128, 1);
     }
 
-    /* Style for arrow inside toggle button with transition */
     .toggle-arrow .arrow {
         display: inline-block;
         transition: transform 0.3s ease;
     }
 
-/* Rotate the arrow when theory container is open */
 .theory-container.open + .toggle-arrow .arrow {
     transform: rotate(180deg);
 }
 
-/* Style for colors table with centered text and collapse */
+/* Colors table */
 .colors-table {
     width: auto;
     margin: 20px auto;
@@ -646,19 +575,18 @@ label {
     text-align: center;
 }
 
-    /* Style for table header and data cells inside colors table */
-    .colors-table th, .colors-table td {
+    .colors-table th,
+    .colors-table td {
         border: 1px solid #ddd;
         padding: 8px;
         color: black;
     }
 
-    /* Style for table header with background color */
     .colors-table th {
         background-color: #f2f2f2;
     }
 
-/* Style for color cells inside colors table */
+/* Color cell */
 .color-cell {
     width: 50px;
     height: 20px;
@@ -666,7 +594,7 @@ label {
     display: inline-block;
 }
 
-/* Style for error message with white text, bold font, and center alignment */
+/* Error message */
 .error-message {
     color: #ffffff;
     text-align: center;
@@ -674,6 +602,53 @@ label {
     font-weight: bold;
 }
 
+/* Placeholder */
+.placeholder {
+    color: #666;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+/* Expandable card */
+.expandable-card {
+    position: relative;
+    max-width: 1000px;
+    max-height: 100px;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    padding-bottom: 40px;
+}
+
+    .expandable-card.expanded {
+        max-height: 10000px;
+    }
+
+/* Expand toggle */
+.expand-toggle {
+    position: absolute;
+    left: 50%;
+    margin-top: -15px;
+    transform: translateX(-50%);
+    background-color: #007BFF;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    user-select: none;
+    transition: transform 0.3s ease;
+}
+
+.expandable-card.expanded .expand-toggle {
+    transform: translateX(-50%) rotate(180deg);
+}
+
+/* Matrix header */
 .matrix-header {
     background-color: #d6e4f0;
     font-weight: bold;
@@ -682,4 +657,24 @@ label {
     text-align: center;
     padding: 6px 10px;
     border: 1px solid #ccc;
+}
+
+.compact-matrix td.matrix-header {
+    background-color: #d6e4f0 !important;
+    font-weight: bold !important;
+    font-size: 16px !important;
+    color: #000 !important;
+    text-align: center !important;
+    padding: 6px 10px !important;
+    border: 1px solid #ccc !important;
+}
+
+/* Strong text */
+strong {
+    color: #333;
+}
+
+/* Paragraph */
+p {
+    color: black;
 }
