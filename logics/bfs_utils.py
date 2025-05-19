@@ -4,6 +4,23 @@ from theory_algorithm import get_theory
 from bottle import request
 from logics.json_utils import save_algorithm_record
 
+"""
+    Что делает функция:
+        Обрабатывает HTTP-запрос (GET или POST) от веб-формы для запуска алгоритма обхода графа
+
+    Входные данные:
+        request (bottle.Request): объект запроса, содержащий данные формы (метод, количество вершин,
+                                  стартовую вершину, матрицу смежности).
+
+    Выходные данные:
+        dict: словарь со следующими ключами:
+            - 'form_data' (dict): данные формы (кол-во вершин, матрица смежности, стартовая вершина),
+            - 'result_matrix' (list[list[int]] | None): матрица остовного дерева, если построение прошло успешно,
+            - 'tree_vertices' (list[int] | None): список вершин, входящих в остовное дерево,
+            - 'graph_image_path' (str | None): путь к сгенерированному изображению графа,
+            - 'error_message' (str | None): описание ошибки (если произошла),
+            - 'theory_text' (str): HTML-контент с теорией по алгоритму BFS.
+    """
 def get_bfs_data(request):
     # Получаем текст теории из markdown-файла
     theory_text = get_theory('static/theory/bfs_theory.md')
@@ -18,7 +35,7 @@ def get_bfs_data(request):
     # Переменные для хранения результатов
     result_matrix = None
     tree_vertices = None
-    graph_image_path = '/static/dynamic/images/denis.jpg'
+    graph_image_path = None
     error_message = None
 
     # Обработка POST-запроса (пользователь нажал "Build Graph")

@@ -10,25 +10,26 @@ function toggleTheory() {
 function updateMatrixTable(n) {
     const adjacencyTable = document.getElementById('adjacency-table');
     adjacencyTable.innerHTML = '';
+    if (n > 8) n = 8;
 
     if (n >= 1) {
-        // Создаём заголовок таблицы с номерами столбцов
+        // Создаём заголовок таблицы с номерами столбцов (1-based)
         let headerRow = document.createElement('tr');
-        headerRow.innerHTML = '<td></td>';
+        headerRow.innerHTML = '<td class="matrix-header"></td>';
         for (let j = 0; j < n; j++) {
-            headerRow.innerHTML += `<td>${j}</td>`;
+            headerRow.innerHTML += `<td class="matrix-header">${j + 1}</td>`;
         }
         adjacencyTable.appendChild(headerRow);
 
-        // Создаём строки таблицы с инпутами для ввода рёбер
+        // Создаём строки таблицы с инпутами для ввода рёбер (1-based для отображения)
         for (let i = 0; i < n; i++) {
             let row = document.createElement('tr');
-            row.innerHTML = `<td>${i}</td>`;
+            row.innerHTML = `<td class="matrix-header">${i + 1}</td>`;
             for (let j = 0; j < n; j++) {
                 let cell = document.createElement('td');
                 let input = document.createElement('input');
                 input.type = 'number';
-                input.name = `edge_${i}_${j}`;
+                input.name = `edge_${i}_${j}`; // 0-based для backend
                 input.min = '0';
                 input.max = '1';
                 input.value = '0';
@@ -39,10 +40,10 @@ function updateMatrixTable(n) {
             adjacencyTable.appendChild(row);
         }
 
-        // Обновляем стартовую вершину, если она выходит за пределы
+        // Обновляем стартовую вершину: устанавливаем 1, если выходит за пределы или меньше 1
         const startVertexInput = document.getElementById('start_vertex');
-        if (parseInt(startVertexInput.value) >= n) {
-            startVertexInput.value = '0';
+        if (isNaN(parseInt(startVertexInput.value)) || parseInt(startVertexInput.value) < 1 || parseInt(startVertexInput.value) > n) {
+            startVertexInput.value = '1';
         }
     }
 }
@@ -50,8 +51,8 @@ function updateMatrixTable(n) {
 // Функция для генерации случайной матрицы смежности
 function generateRandomMatrix() {
     const n = parseInt(document.getElementById('num_vertices').value);
-    if (isNaN(n) || n < 1) {
-        alert('Please enter a valid number of vertices (at least 1).');
+    if (isNaN(n) || n < 1 || n > 8) {
+        alert('Please enter a valid number of vertices (1 to 8).');
         return;
     }
 
@@ -73,19 +74,39 @@ function generateRandomMatrix() {
 function clearFields() {
     const form = document.getElementById('graphForm');
     form.reset();
+
+    // Сброс значений полей
     const numVerticesInput = document.getElementById('num_vertices');
+    const startVertexInput = document.getElementById('start_vertex');
     numVerticesInput.value = '3';
+    startVertexInput.value = '1';
+
+    // Обновление таблицы смежности
     updateMatrixTable(3);
+
+    // Очистка визуализации графа
+    const graphPlot = document.querySelector('.graph-plot');
+    if (graphPlot) {
+        graphPlot.innerHTML = '<p>Graph will be displayed here after processing.</p>';
+    }
+
+    // Очистка результата остовного дерева
+    const treeMatrix = document.getElementById('treeMatrix');
+    if (treeMatrix) {
+        treeMatrix.remove();
+    }
 }
+
 
 // Обработчик изменения значения поля "число вершин"
 document.getElementById('num_vertices').addEventListener('input', function () {
     const n = parseInt(this.value);
-    if (!isNaN(n) && n >= 1) {
+    if (!isNaN(n) && n >= 1 && n <= 8) {
         updateMatrixTable(n);
     } else {
         updateMatrixTable(3);
     }
+
 });
 
 // При загрузке страницы инициализируем таблицу

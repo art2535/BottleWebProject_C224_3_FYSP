@@ -18,7 +18,7 @@
     <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
     <Name>BottleWebProject_C224_3_FYSP</Name>
     <RootNamespace>BottleWebProject_C224_3_FYSP</RootNamespace>
-    <InterpreterId>MSBuild|env3.11|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env3.9|$(MSBuildProjectFullPath)</InterpreterId>
     <TestFramework>unittest</TestFramework>
     <UnitTestPattern>test*.py</UnitTestPattern>
     <UnitTestRootDirectory>tests/</UnitTestRootDirectory>
@@ -56,7 +56,7 @@
     <Compile Include="tests\test_beam_search.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="tests\test_dfs_search.py">
+    <Compile Include="tests\test_bfs_search.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\__init__.py">
