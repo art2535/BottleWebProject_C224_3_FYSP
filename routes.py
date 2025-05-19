@@ -11,6 +11,7 @@ from bottle import route, view, request, redirect, response, template, static_fi
 from theory_algorithm import get_theory
 from methods.graph_coloring_algorithm import greedy_graph_coloring, draw_colored_graph
 from methods.bfs_spanning_tree import bfs_spanning_tree, draw_bfs_graph
+from methods.dfs_spanning_tree import process_dfs_request
 from logics.beam_utils import get_data
 from logics.bfs_utils import get_bfs_data
 import matplotlib.pyplot as plt
@@ -31,15 +32,14 @@ def bfs():
     context['year'] = datetime.now().year
     return context
 
-@route('/dfs')
+@route('/dfs', method=['GET', 'POST'])
 @view('depth_method')
 def section2():
-    """Renders section 2."""
-    theory_text = get_theory('static/theory/dfs_theory.md')
-    return dict(
-        year=datetime.now().year,
-        theory_text=theory_text
-    )
+    """Renders section 2 with DFS spanning tree functionality."""
+    data = process_dfs_request()
+    data['year'] = datetime.now().year
+    data['theory_text'] = get_theory('static/theory/dfs_theory.md')
+    return data
 
 @route('/beam', method=['GET', 'POST'])
 @view('beam_method')

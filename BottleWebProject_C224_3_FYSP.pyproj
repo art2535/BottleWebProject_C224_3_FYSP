@@ -45,6 +45,9 @@
     <Compile Include="methods\bfs_spanning_tree.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="methods\dfs_spanning_tree.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="routes.py" />
     <Compile Include="theory_algorithm.py">
       <SubType>Code</SubType>
