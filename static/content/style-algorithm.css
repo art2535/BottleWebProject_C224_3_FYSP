@@ -145,9 +145,16 @@ section.card {
 }
 
 /* Style for adjacency matrix and graph plot with width adjustments and top margin */
-.adjacency-matrix, .graph-plot {
+.graph-plot {
     width: 70%;
     margin-top: 40px;
+}
+
+.adjacency-matrix {
+    width: 70%; /* Ширина блока */
+    margin-top: 40px; /* Отступ сверху */
+    margin-left: auto; /* Центрирование блока по горизонтали */
+    margin-right: auto; /* Центрирование блока по горизонтали */
 }
 
 /* Heading style for h3 with centered text and margin adjustments */
@@ -169,16 +176,7 @@ h3 {
     margin-top: -20px;
 }
 
-/* Style for compact matrix with collapsed borders, centered text, and shadow */
-.compact-matrix {
-    width: auto;
-    border-collapse: collapse;
-    text-align: center;
-    margin: 0 auto;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
+
 
 /* Style for compact matrix ready state with additional left margin */
 .compact-matrix-ready {
@@ -193,7 +191,7 @@ h3 {
 }
 
     /* Styling for compact matrix cells with padding, border, and font size */
-    .compact-matrix-ready td, .compact-matrix td {
+    .compact-matrix-ready td{
         padding: 4px;
         border: 1px solid #ddd;
         font-size: 12px;
@@ -203,26 +201,68 @@ h3 {
         color: black;
     }
 
-/* Style for number input fields with size, padding, and smooth transition */
+
+
+
+/* Style for compact matrix with collapsed borders, centered text, and shadow */
+.compact-matrix {
+    width: auto;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+    /* Table cells */
+    .compact-matrix td {
+        padding: 4px;
+        border: 1px solid #ddd;
+        font-size: 12px;
+        text-align: center;
+        color: black;
+        min-width: 50px;
+        height: auto;
+    }
+
+    /* Input fields inside the table */
+    .compact-matrix input {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        font-size: 16px;
+        padding: 2px;
+        margin: 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+/* Styles for input[type="number"] */
 input[type="number"] {
-    width: 40px;
-    height: 25px;
+    width: 100%;
+    height: 100%;
     text-align: center;
     font-size: 16px;
     padding: 2px;
-    margin: 2px;
     border: 1px solid #ddd;
     border-radius: 4px;
     background-color: #f9f9f9;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-    /* Style for focused number inputs with changed background and border color */
+    /* Focus for input */
     input[type="number"]:focus {
         background-color: #eaf7e5;
         border-color: #4CAF50;
         outline: none;
     }
+
+
+
 
 /* Tree matrix with top margin */
 .tree-matrix {
@@ -384,6 +424,14 @@ p {
         background-color: #4b79a1;
     }
 
+.form-container {
+    width: 644px; /* Устанавливаем ту же ширину, что и у matrix-card */
+    height: 590px; /* Устанавливаем ту же высоту, что и у matrix-card */
+    padding: 20px; /* Сохраняем отступы */
+    margin-right: 2%; /* Сохраняем отступ справа */
+    margin-top: -15px;
+}
+
 /* Style for input group with flex layout and space between input items */
 .input-group {
     display: flex;
@@ -402,16 +450,7 @@ p {
     color: black;
 }
 
-/* Style for number input fields with padding, border, and width */
-input[type="number"] {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    width: 80%;
-    margin: 0 auto;
-    color: black;
-}
+
 
 /* Focus effect for number input fields with background color and border change */
 .input-group .input-field {
