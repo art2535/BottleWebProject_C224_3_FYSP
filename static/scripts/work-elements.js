@@ -16,17 +16,15 @@ function updateMatrix() {
     const table = document.getElementById('matrixTable');
     table.innerHTML = '';
 
-
-    let header = '<tr><td></td>';
+    let header = '<tr><td class="matrix-header"></td>';
     for (let i = 1; i <= vertices; i++) {
-        header += `<td>${i}</td>`;
+        header += `<td class="matrix-header">${i}</td>`;
     }
     header += '</tr>';
     table.innerHTML += header;
 
-
     for (let i = 0; i < vertices; i++) {
-        let row = `<tr><td>${i + 1}</td>`;
+        let row = `<tr><td class="matrix-header">${i + 1}</td>`;
         for (let j = 0; j < vertices; j++) {
             row += `<td><input type="number" name="edge_${i + 1}_${j + 1}" min="0" max="1" value="0"></td>`;
         }
@@ -34,6 +32,7 @@ function updateMatrix() {
         table.innerHTML += row;
     }
 }
+
 
 function resetForm() {
     document.getElementById('dfsForm').reset();
