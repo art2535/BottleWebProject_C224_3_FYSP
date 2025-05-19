@@ -56,6 +56,12 @@
     <Compile Include="tests\test_beam_search.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="tests\test_dfs_search.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="theory_algorithm.py">
       <SubType>Code</SubType>
     </Compile>

@@ -12,11 +12,6 @@ from logics.json_utils import save_algorithm_record
 def create_spanning_tree(adj_matrix, start_vertex):
     """
     Create a spanning tree using DFS from the adjacency matrix.
-
-    This function generates a graph from the given adjacency matrix, performs a 
-    Depth-First Search (DFS) starting from the specified vertex to create a spanning 
-    tree, and returns the full graph, the spanning tree, the adjacency matrix of the 
-    spanning tree, and a list of vertices in the order they were visited. If an error occurs, it returns the error message.
     """
     n = len(adj_matrix)
     G_full = nx.Graph()
@@ -31,6 +26,10 @@ def create_spanning_tree(adj_matrix, start_vertex):
                 G_full.add_edge(i, j)
 
     start_vertex = start_vertex - 1  # Convert to 0-based indexing
+
+    # Check if the graph is connected
+    if not nx.is_connected(G_full):
+        return None, None, None, None, "Graph is not connected"
 
     try:
         # Perform DFS to get the edges of the spanning tree
@@ -52,6 +51,7 @@ def create_spanning_tree(adj_matrix, start_vertex):
     except nx.NetworkXError as e:
         # If an error occurs during DFS, return the error message
         return None, None, None, None, str(e)
+
 
 
 
