@@ -6,6 +6,8 @@ import random
 import os
 import json
 
+from logics.json_utils import save_algorithm_record
+
 def create_spanning_tree(adj_matrix, start_vertex):
     """Create a spanning tree using DFS from the adjacency matrix."""
     n = len(adj_matrix)
@@ -170,6 +172,20 @@ def process_dfs_request():
                 elif G and T:
                     graph_path = save_graph_image(G, T)
                     save_to_json(adj_matrix, start_vertex, tree_matrix)
+
+                # Логирование независимо от результата (с ошибкой или нет)
+                input_data = {
+                    'num_vertices': vertices,
+                    'adjacency_matrix': adj_matrix,
+                    'start_vertex': start_vertex
+                }
+                save_algorithm_record(
+                    algorithm='dfs',
+                    input_data=input_data,
+                    result_matrix=tree_matrix if tree_matrix else None,
+                    error_message=error
+                )
+
 
         except (ValueError, TypeError) as e:
             error = "Invalid input: Please enter valid numbers"
