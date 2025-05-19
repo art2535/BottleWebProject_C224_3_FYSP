@@ -1,36 +1,27 @@
-# Импорт стандартной библиотеки os
 import os
-
-# Импорт функции построения остовного дерева BFS и функции отрисовки графа
 from methods.bfs_spanning_tree import bfs_spanning_tree, draw_bfs_graph
-
-# Импорт функции получения теоретической информации
 from theory_algorithm import get_theory
-
-# Импорт объекта request из фреймворка Bottle
 from bottle import request
+from logics.json_utils import save_algorithm_record
 
-# Функция для расчёта данных, связанных с алгоритмом обхода в ширину (BFS)
-# Функция принимает аргумент `request`, содержащий HTTP-запрос
-# Функция возвращает словарь с данными формы, результатами выполнения BFS, изображением графа и ошибками (если есть)
 def get_bfs_data(request):
     # Получаем текст теории из markdown-файла
     theory_text = get_theory('static/theory/bfs_theory.md')
 
     # Инициализация значений формы по умолчанию
     form_data = {
-        'num_vertices': '3',  # количество вершин по умолчанию
-        'adjacency_matrix': [[0, 0, 0], [0, 0, 0], [0, 0, 0]],  # пустая матрица смежности
-        'start_vertex': '0'  # вершина начала обхода по умолчанию
+        'num_vertices': '3',
+        'adjacency_matrix': [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+        'start_vertex': '0'
     }
 
     # Переменные для хранения результатов
     result_matrix = None
     tree_vertices = None
-    graph_image_path = '/static/dynamic/images/denis.jpg'  # путь к изображению графа по умолчанию
-    error_message = None  # переменная для хранения сообщений об ошибке
+    graph_image_path = '/static/dynamic/images/denis.jpg'
+    error_message = None
 
-    # Обработка POST-запроса (пользователь отправил форму)
+    # Обработка POST-запроса (пользователь нажал "Build Graph")
     if request.method == 'POST':
         try:
             # Получаем количество вершин и проверяем корректность
@@ -85,20 +76,24 @@ def get_bfs_data(request):
             # Обработка исключений и вывод сообщения об ошибке
             error_message = str(e)
 
-    # При GET-запросе или при наличии ошибки — сбрасываем матрицу смежности
+        # Сохранение записи в JSON только после нажатия "Build Graph"
+        save_algorithm_record('bfs', form_data, result_matrix, error_message)
+
+    # При GET-запросе или при наличии ошибки — используем дефолтные значения
     if request.method == 'GET' or error_message:
         try:
             n = int(form_data.get('num_vertices', 3))
-            form_data['adjacency_matrix'] = [[0 for _ in range(n)] for _ in range(n)]
+            if len(form_data['adjacency_matrix']) != n or any(len(row) != n for row in form_data['adjacency_matrix']):
+                form_data['adjacency_matrix'] = [[0 for _ in range(n)] for _ in range(n)]
         except:
             form_data['adjacency_matrix'] = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
     # Возвращаем результат в виде словаря
     return {
-        'form_data': form_data,  # исходные данные формы
-        'result_matrix': result_matrix,  # результат BFS в виде матрицы
-        'tree_vertices': tree_vertices,  # список вершин остовного дерева
-        'graph_image_path': graph_image_path,  # путь к изображению графа
-        'error_message': error_message,  # сообщение об ошибке, если есть
-        'theory_text': theory_text  # текст теоретической части
+        'form_data': form_data,
+        'result_matrix': result_matrix,
+        'tree_vertices': tree_vertices,
+        'graph_image_path': graph_image_path,
+        'error_message': error_message,
+        'theory_text': theory_text
     }

@@ -36,6 +36,9 @@
     <Compile Include="logics\bfs_utils.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="logics\json_utils.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="methods\beam_search_spanning_tree.py">
       <SubType>Code</SubType>
     </Compile>
@@ -72,7 +75,6 @@
     <Content Include="static\dynamic\images\denis.jpg" />
     <Content Include="static\dynamic\images\figure-dfs_1.jpg" />
     <Content Include="static\dynamic\images\maxim.jpg" />
-    <Content Include="static\dynamic\logos\input_data.json" />
     <Content Include="static\scripts\bfs-method-script.js">
       <SubType>Code</SubType>
     </Content>
