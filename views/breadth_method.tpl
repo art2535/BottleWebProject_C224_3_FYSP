@@ -134,7 +134,7 @@
                                 </tr>
                                 % for i in range(int(form_data['num_vertices'])):
                                     <tr>
-                                        <td>{{ i + 1 }}</td>
+                                        <td class="matrix-header">{{ i + 1 }}</td>
                                         % for j in range(int(form_data['num_vertices'])):
                                             <td>{{ result_matrix[i][j] }}</td>
                                         % end
