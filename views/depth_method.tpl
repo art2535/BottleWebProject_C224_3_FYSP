@@ -56,7 +56,7 @@
                             <div class="input-item">
                                 <label for="vertices">Number of Vertices:</label>
                                 <input type="number" id="vertices" name="vertices" class="input-field" 
-                                       value="{{vertices}}" min="1" max="8" onchange="updateMatrix()">
+                                       value="{{vertices}}" min="2" max="8" onchange="updateMatrix()">
                             </div>
                             <div class="input-item">
                                 <label for="start_vertex">Starting Vertex:</label>
@@ -124,7 +124,7 @@
                                         % for j in range(vertices):
                                             <td>
                                                 <input type="number" name="edge_{{i + 1}}_{{j + 1}}" 
-                                                       min="0" max="1" value="{{adj_matrix[i][j]}}">
+                                                       min="0" max="1" value="{{tree_matrix[i][j]}}">
                                             </td>
                                         % end
                                     </tr>
