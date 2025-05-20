@@ -115,7 +115,7 @@
                         <div class="graph-plot">
                             % if graph_image_path:
                                 <!-- Изображение построенного графа -->
-                                <img src="{{ graph_image_path }}" alt="Graph">
+                                <img src="{{ graph_image_path }}" alt="Graph" id="graph-image">
                             % else:
                                 <p>Graph will be displayed here after processing.</p>
                             % end
