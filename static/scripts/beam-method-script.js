@@ -29,8 +29,8 @@ function updateMatrixTables(n, preserveValues = false) {
     adjacencyTable.innerHTML = '';
     weightsTable.innerHTML = '';
 
-    // Check if n is within the valid range (3�7)
-    if (n >= 3 && n <= 7) {
+    // Check if n is within the valid range (from 2 to 7)
+    if (n >= 2 && n <= 7) {
         // Create header rows (horizontal numbering)
         let headerRowAdj = document.createElement('tr');
         let headerRowWgt = document.createElement('tr');
@@ -100,8 +100,8 @@ function updateMatrixTables(n, preserveValues = false) {
 // Generate random values for adjacency and weight matrices
 function generateRandomMatrices() {
     const n = parseInt(document.getElementById('n-vertices').value);
-    if (isNaN(n) || n < 3 || n > 7) {
-        alert('Please enter a valid number of vertices (from 3 to 7).');
+    if (isNaN(n) || n < 2 || n > 7) {
+        alert('Please enter a valid number of vertices (from 2 to 7).');
         return;
     }
 
@@ -109,14 +109,14 @@ function generateRandomMatrices() {
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
             document.querySelector(`input[name="adjacency_${i}_${j}"]`).value = Math.floor(Math.random() * 2);
-            document.querySelector(`input[name="weights_${i}_${j}"]`).value = Math.floor(Math.random() * 10);
+            document.querySelector(`input[name="weights_${i}_${j}"]`).value = Math.floor(Math.random() * 51);
         }
     }
 }
 
 // Clear the form fields and reset the result card
 function clearFields() {
-    const n = parseInt(document.getElementById('n-vertices').value) || 3;
+    const n = parseInt(document.getElementById('n-vertices').value) || 2;
     // Clear matrix input fields
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
@@ -137,17 +137,17 @@ function clearFields() {
 // Listener to update tables when the number of vertices changes
 document.getElementById('n-vertices').addEventListener('input', function () {
     const n = parseInt(this.value);
-    if (!isNaN(n) && n >= 3 && n <= 7) {
+    if (!isNaN(n) && n >= 2 && n <= 7) {
         updateMatrixTables(n, true); // Preserve values when updating
     } else {
-        this.value = 3;
-        updateMatrixTables(3, true);
+        this.value = 2;
+        updateMatrixTables(2, true);
     }
 });
 
 // Initialization on page load
 document.addEventListener('DOMContentLoaded', function () {
-    const n = parseInt(document.getElementById('n-vertices').value) || 3;
+    const n = parseInt(document.getElementById('n-vertices').value) || 2;
     // Only update tables if no server-side data exists
     const hasServerData = document.querySelectorAll('input[name^="adjacency_"]').length > 0;
     if (!hasServerData) {
