@@ -1,3 +1,5 @@
+# logics/greedy_utils.py
+
 from methods.graph_coloring_algorithm import greedy_graph_coloring, draw_colored_graph
 from logics.json_utils import save_algorithm_record
 import matplotlib.pyplot as plt
@@ -5,50 +7,58 @@ import matplotlib.colors
 
 def get_data(request):
     """
-    Similar to beam_utils.get_data, but tailored for greedy graph coloring.
-    Returns a tuple containing:
-      form_data (dict), coloring_result_table (list of dicts),
-      graph_image_base64 (str), num_colors_used_info (str), error_message (str or None)
+    Processes an HTTP request related to the greedy coloring algorithm
+    and returns a tuple containing:
+        - form_data (dict): number of vertices and adjacency matrix
+        - coloring_result_table (list of dicts): result for display
+        - graph_image_base64 (str): image of the graph (base64 format)
+        - num_colors_used_info (str): text info on number of colors used
+        - error_message (str or None): error message if one occurred
     """
-    default_n = 3
-    # Initialize form_data for GET requests with default number of vertices and empty adjacency matrix
+    default_n = 3  # Default number of vertices if not specified
+
+    # Initial form state (used for rendering form fields)
     form_data = {
         'num_vertices': str(default_n),
-        'adjacency_matrix': [[0]*default_n for _ in range(default_n)]
+        'adjacency_matrix': [[0] * default_n for _ in range(default_n)]
     }
 
-    # Initialize output variables
+    # Variables for the result and error display
     coloring_result_table = None
     graph_image_base64 = None
     num_colors_used_info = None
     error_message = None
 
+    # Only handle logic if request is POST (form submission)
     if request.method == 'POST':
-        # Data structure for logging purposes
-        input_for_log = {}
+        input_for_log = {}  # Data to be saved in logs
 
         try:
-            # Parse and validate number of vertices
+            # Read and validate number of vertices
             n_str = request.forms.get('num_vertices', str(default_n)).strip()
             n = int(n_str)
+
             if n < 1 or n > 8:
                 raise ValueError("Number of vertices must be between 1 and 8.")
+
             form_data['num_vertices'] = n_str
             input_for_log['num_vertices'] = n
 
-            # Read the adjacency matrix from the form data
-            adjacency = [[0]*n for _ in range(n)]
+            # Parse the adjacency matrix from the form
+            adjacency = [[0] * n for _ in range(n)]
             for i in range(n):
                 for j in range(n):
-                    val = request.forms.get(f'edge_{i}_{j}', '0').strip()
+                    key = f'edge_{i}_{j}'
+                    val = request.forms.get(key, '0').strip()
                     adjacency[i][j] = int(val) if val in ('0', '1') else 0
+
             form_data['adjacency_matrix'] = adjacency
             input_for_log['adjacency_matrix'] = adjacency
 
-            # Execute the greedy graph coloring algorithm
+            # Run the greedy coloring algorithm
             coloring_result, num_colors_used, _ = greedy_graph_coloring(adjacency)
 
-            # Generate color palette for visual representation
+            # Build the color palette (HEX strings) based on number of colors used
             palette = []
             if num_colors_used > 0:
                 if num_colors_used <= 10:
@@ -60,45 +70,47 @@ def get_data(request):
                 else:
                     cmap = plt.cm.get_cmap('viridis')
                     palette = [
-                        matplotlib.colors.to_hex(
-                            cmap(i / (num_colors_used - 1 if num_colors_used > 1 else 1))
-                        )
+                        matplotlib.colors.to_hex(cmap(i / (num_colors_used - 1 if num_colors_used > 1 else 1)))
                         for i in range(num_colors_used)
                     ]
-                # Extend palette in case the colormap has fewer distinct colors than needed
+
+                # Ensure the palette has enough colors (as a fallback)
                 while len(palette) < num_colors_used:
                     palette.append(matplotlib.colors.to_hex(cmap(len(palette) % cmap.N)))
 
-            # Prepare the result table for displaying vertex-color mapping
+            # Build a table of results to display in the HTML
             coloring_result_table = []
             for vertex, color_id in sorted(coloring_result.items()):
-                hex_color = "#808080"  # Default grey color
-                if color_id > 0 and (color_id - 1) < len(palette):
-                    hex_color = palette[color_id - 1]
-                elif color_id > 0:
-                    hex_color = palette[(color_id - 1) % len(palette)]
+                hex_color = "#808080"  # Default to grey if something goes wrong
+                if color_id > 0:
+                    idx = (color_id - 1) % len(palette) if palette else 0
+                    hex_color = palette[idx]
+
                 coloring_result_table.append({
                     'vertex': vertex,
                     'color_id': color_id,
                     'hex_color': hex_color
                 })
 
-            # Compose user-friendly color usage information
+            # Info text about total number of colors used
             num_colors_used_info = f"Number of colors used: {num_colors_used}"
 
-            # Generate a Base64 image of the colored graph for display
+            # Generate graph image
             graph_image_base64 = draw_colored_graph(adjacency, coloring_result, num_colors_used)
 
-            # Log the successful algorithm execution
+            # Save the run to a log for tracking / audit purposes
             save_algorithm_record(
                 algorithm='coloring',
                 input_data=input_for_log,
-                result_matrix=list(coloring_result.values()),
+                result_matrix=[
+                    {'vertex': v, 'color_id': c}
+                    for v, c in sorted(coloring_result.items())
+                ],
                 error_message=None
             )
 
         except ValueError as ve:
-            # Handle input validation errors and log them
+            # Handle invalid user input (e.g., wrong number of vertices)
             error_message = str(ve)
             save_algorithm_record(
                 algorithm='coloring',
@@ -111,7 +123,7 @@ def get_data(request):
             num_colors_used_info = None
 
         except Exception as ex:
-            # Handle unexpected errors and log them
+            # Handle unexpected errors (e.g., internal logic failures)
             error_message = f"An unexpected server error occurred: {ex}"
             save_algorithm_record(
                 algorithm='coloring',
