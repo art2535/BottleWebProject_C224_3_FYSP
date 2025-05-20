@@ -37,6 +37,7 @@ def get_bfs_data(request):
     tree_vertices = None
     graph_image_path = None
     error_message = None
+    bfs_edges = None
 
     # Обработка POST-запроса (пользователь нажал "Build Graph")
     if request.method == 'POST':
@@ -48,12 +49,13 @@ def get_bfs_data(request):
             num_vertices = int(num_vertices_str)
             form_data['num_vertices'] = num_vertices_str
 
-            # Получаем стартовую вершину и проверяем корректность
+            ## Получаем стартовую вершину и проверяем корректность
             start_vertex_str = request.forms.get('start_vertex')
-            if not start_vertex_str or not start_vertex_str.isdigit() or not (0 <= int(start_vertex_str) < num_vertices):
-                raise ValueError(f"Start vertex must be in range [0, {num_vertices - 1}].")
-            start_vertex = int(start_vertex_str)
-            form_data['start_vertex'] = start_vertex_str
+            if not start_vertex_str or not start_vertex_str.isdigit() or not (1 <= int(start_vertex_str) <= num_vertices):
+                raise ValueError(f"Start vertex must be in range [1, {num_vertices}].")
+            start_vertex = int(start_vertex_str) - 1  # Перевод в 0-индексацию
+            form_data['start_vertex'] = start_vertex_str  # Сохраняем исходное значение для формы
+
 
             # Считываем матрицу смежности из формы
             adjacency_matrix = []
@@ -78,16 +80,17 @@ def get_bfs_data(request):
                         raise ValueError(f"Matrix must be symmetric at ({i},{j})")
 
             # Выполнение BFS и построение остовного дерева
-            result_matrix, tree_vertices = bfs_spanning_tree(num_vertices, adjacency_matrix, start_vertex)
+            result_matrix, tree_vertices, bfs_edges = bfs_spanning_tree(num_vertices, adjacency_matrix, start_vertex)
 
             # Обработка возможной ошибки в виде строки
             if isinstance(result_matrix, str):
                 error_message = result_matrix
                 result_matrix = None
                 tree_vertices = None
+                bfs_edges = None
             else:
                 # Отрисовка изображения графа на основе результата
-                graph_image_path = draw_bfs_graph(result_matrix, adjacency_matrix, num_vertices)
+                graph_image_path = draw_bfs_graph(result_matrix, adjacency_matrix, num_vertices, bfs_edges)
 
         except Exception as e:
             # Обработка исключений и вывод сообщения об ошибке
@@ -109,7 +112,7 @@ def get_bfs_data(request):
     return {
         'form_data': form_data,
         'result_matrix': result_matrix,
-        'tree_vertices': tree_vertices,
+        'bfs_edges': [(u + 1, v + 1) for u, v in bfs_edges] if bfs_edges else None,
         'graph_image_path': graph_image_path,
         'error_message': error_message,
         'theory_text': theory_text

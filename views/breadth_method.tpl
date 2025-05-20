@@ -70,7 +70,7 @@
                             <div class="input-item">
                                 <label for="num_vertices">Number of Vertices:</label>
                                 <input type="number" id="num_vertices" name="num_vertices" class="input-field"
-                                    value="{{ form_data.get('num_vertices', 3) }}" min="1" max="8" onchange="updateMatrixTable(this.value)">
+                                    value="{{ form_data.get('num_vertices', 3) }}" min="2" max="8" onchange="updateMatrixTable(this.value)">
                             </div>
 
                             <div class="input-item">
@@ -142,7 +142,7 @@
                                 % end
                             </table>
                             <!-- Список вершин, включённых в остовное дерево -->
-                            <p><strong>Vertices from which the spanning tree was obtained:</strong> {{ ', '.join(map(str, tree_vertices)) }}</p>
+                            <p><strong>Traversal Order:</strong> {{ ' → '.join(map(str, bfs_edges)) }}</p>
                         </div>
                         % end
                     </div>

@@ -1,121 +1,104 @@
-# Импорт стандартного модуля для работы с путями файлов
 import os
-
-# Импорт библиотеки для работы с графами
 import networkx as nx
-
-# Импорт библиотеки для визуализации
 import matplotlib.pyplot as plt
+"""
+    Строит остовное дерево графа методом обхода в ширину (BFS).
 
-# Функция для построения остовного дерева с использованием обхода в ширину (BFS)
-# Функция принимает:
-#   - num_vertices: количество вершин в графе
-#   - adjacency_matrix: матрицу смежности графа
-#   - start_vertex: начальную вершину для BFS
-# Функция возвращает:
-#   - result_matrix: матрицу смежности остовного дерева
-#   - tree_vertices: список посещённых вершин в порядке обхода
-#   - В случае ошибки (если граф несвязный) — строку с сообщением об ошибке и None
+    Входные параметры:
+    - num_vertices (int): количество вершин в графе.
+    - adjacency_matrix (List[List[int]]): матрица смежности графа.
+    - start_vertex (int): индекс стартовой вершины (от 0 до num_vertices-1).
+
+    Возвращает:
+    - В случае связного графа:
+        - result_matrix (List[List[int]]): матрица смежности остовного дерева.
+        - tree_vertices (List[int]): список вершин остовного дерева.
+        - edges (List[Tuple[int, int]]): список ребер остовного дерева.
+    - Если граф несвязный:
+        - строку с сообщением об ошибке,
+        - None,
+        - None.
+    """
 def bfs_spanning_tree(num_vertices, adjacency_matrix, start_vertex):
-    # Инициализируем результирующую матрицу остовного дерева нулями
+    # Инициализируем результирующую матрицу смежности для остовного дерева нулями
     result_matrix = [[0] * num_vertices for _ in range(num_vertices)]
-
-    # Массив для отслеживания посещённых вершин
+    # Массив для отслеживания посещенных вершин
     visited = [False] * num_vertices
+    # Отмечаем стартовую вершину как посещенную
     visited[start_vertex] = True
-
-    # Очередь для обхода BFS
+    # Очередь для BFS, начинаем со стартовой вершины
     queue = [start_vertex]
-
-    # Список вершин в остовном дереве
+    # Список вершин, включенных в остовное дерево
     tree_vertices = [start_vertex]
-
-    # Список рёбер остовного дерева (для построения графа, если нужно)
+    # Список ребер остовного дерева
     edges = []
 
     # Основной цикл обхода в ширину
     while queue:
-        current = queue.pop(0)  # извлекаем текущую вершину из очереди
-        for neighbor in range(num_vertices):  # проходим по всем возможным соседям
+        current = queue.pop(0)  # Извлекаем вершину из очереди
+        # Перебираем всех соседей текущей вершины
+        for neighbor in range(num_vertices):
+            # Если сосед связан ребром и еще не посещен
             if adjacency_matrix[current][neighbor] == 1 and not visited[neighbor]:
-                visited[neighbor] = True  # помечаем соседа как посещённого
-                queue.append(neighbor)  # добавляем соседа в очередь
-                tree_vertices.append(neighbor)  # добавляем в список дерева
-                edges.append((current, neighbor))  # добавляем ребро
-
-                # Обновляем результатирующую матрицу (граф неориентированный)
+                visited[neighbor] = True  # Отмечаем как посещенного
+                queue.append(neighbor)    # Добавляем в очередь
+                tree_vertices.append(neighbor)  # Добавляем в список вершин дерева
+                edges.append((current, neighbor))  # Добавляем ребро в список
+                # Обновляем результирующую матрицу смежности остовного дерева
                 result_matrix[current][neighbor] = 1
                 result_matrix[neighbor][current] = 1
 
-    # Проверка: если не все вершины посещены — граф несвязный
+    # Проверяем, что остовное дерево охватывает все вершины (граф связный)
     if len(tree_vertices) != num_vertices:
-        return f"The spanning tree is not built: the graph is disconnected.", None
+        return "The spanning tree is not built: the graph is disconnected.", None, None
 
-    return result_matrix, tree_vertices
+    # Возвращаем матрицу остовного дерева, список вершин и ребер
+    return result_matrix, tree_vertices, edges
 
 
-# Функция для отрисовки графа с выделением остовного дерева
-# Функция принимает:
-#   - result_matrix: матрицу смежности остовного дерева (если None — рисуется только исходный граф)
-#   - adjacency_matrix: исходная матрица смежности
-#   - num_vertices: количество вершин
-# Функция возвращает:
-#   - путь к сохранённому изображению графа в формате PNG
-def draw_bfs_graph(result_matrix, adjacency_matrix, num_vertices):
-    G = nx.Graph()  # создаём пустой граф
-
+def draw_bfs_graph(result_matrix, adjacency_matrix, num_vertices, bfs_edges=None):
+    G = nx.Graph()  # Создаем пустой граф NetworkX
     # Добавляем вершины с номерами от 1 до num_vertices
     for i in range(1, num_vertices + 1):
         G.add_node(i)
 
-    # Добавляем все рёбра из матрицы смежности (с индексами +1, для красивого отображения)
     all_edges = []
+    # Добавляем все ребра исходного графа (по верхнему треугольнику матрицы)
     for i in range(num_vertices):
         for j in range(i + 1, num_vertices):
             if adjacency_matrix[i][j] == 1:
                 all_edges.append((i + 1, j + 1))
 
-    # Добавляем рёбра, входящие в остовное дерево (если оно есть)
     tree_edges = []
-    if result_matrix:
-        for i in range(num_vertices):
-            for j in range(i + 1, num_vertices):
-                if result_matrix[i][j] == 1:
-                    tree_edges.append((i + 1, j + 1))
+    # Если переданы ребра остовного дерева, преобразуем их для визуализации
+    if bfs_edges:
+        # Сдвигаем индексы на +1, т.к. в NetworkX вершины нумеруются с 1
+        tree_edges = [(u + 1, v + 1) for u, v in bfs_edges]
 
-    # Располагаем вершины графа на плоскости
+    # Генерируем координаты вершин для визуализации
     pos = nx.spring_layout(G, seed=42)
-
-    # Создаём фигуру для графика
     plt.figure(figsize=(6, 6))
 
-    # Отрисовываем все рёбра серым цветом
+    # Рисуем все ребра исходного графа серым цветом
     nx.draw_networkx_edges(G, pos, edgelist=all_edges, edge_color='gray', width=1.5)
-
-    # Отрисовываем рёбра остовного дерева красным цветом
-    if result_matrix:
+    # Если есть ребра остовного дерева, рисуем их красным цветом поверх
+    if tree_edges:
         nx.draw_networkx_edges(G, pos, edgelist=tree_edges, edge_color='red', width=2.5)
 
-    # Отрисовываем вершины и их подписи
+    # Рисуем вершины светло-голубого цвета
     nx.draw_networkx_nodes(G, pos, node_color='lightblue', node_size=1000)
+    # Добавляем подписи к вершинам (номера вершин)
     labels = {i: str(i) for i in G.nodes}
     nx.draw_networkx_labels(G, pos, labels=labels, font_size=14)
-
-    # Устанавливаем заголовок графика
     plt.title("Spanning Tree (red edges)")
-
-    # Компактно располагаем элементы
     plt.tight_layout()
 
-    # Указываем путь для сохранения изображения
+    # Создаем папки для сохранения файла, если их нет
     static_path = 'static/dynamic/graphs/spanning_tree.png'
-
-    # Создаём директорию, если она ещё не существует
     os.makedirs(os.path.dirname(static_path), exist_ok=True)
-
-    # Сохраняем изображение и закрываем график
+    # Сохраняем рисунок в файл
     plt.savefig(static_path)
     plt.close()
 
-    # Возвращаем относительный путь к изображению
+    # Возвращаем путь к сохраненному файлу (для использования, например, на вебе)
     return f"/{static_path}"

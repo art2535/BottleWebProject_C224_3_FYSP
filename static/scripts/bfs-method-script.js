@@ -12,7 +12,7 @@ function updateMatrixTable(n) {
     adjacencyTable.innerHTML = '';
     if (n > 8) n = 8;
 
-    if (n >= 1) {
+    if (n >= 2) {
         // Создаём заголовок таблицы с номерами столбцов (1-based)
         let headerRow = document.createElement('tr');
         headerRow.innerHTML = '<td class="matrix-header"></td>';
@@ -51,8 +51,8 @@ function updateMatrixTable(n) {
 // Функция для генерации случайной матрицы смежности
 function generateRandomMatrix() {
     const n = parseInt(document.getElementById('num_vertices').value);
-    if (isNaN(n) || n < 1 || n > 8) {
-        alert('Please enter a valid number of vertices (1 to 8).');
+    if (isNaN(n) || n < 2 || n > 8) {
+        alert('Please enter a valid number of vertices (2 to 8).');
         return;
     }
 
@@ -78,11 +78,11 @@ function clearFields() {
     // Сброс значений полей
     const numVerticesInput = document.getElementById('num_vertices');
     const startVertexInput = document.getElementById('start_vertex');
-    numVerticesInput.value = '3';
+    numVerticesInput.value = '2';
     startVertexInput.value = '1';
 
     // Обновление таблицы смежности
-    updateMatrixTable(3);
+    updateMatrixTable(2);
 
     // Очистка визуализации графа
     const graphPlot = document.querySelector('.graph-plot');
@@ -97,20 +97,18 @@ function clearFields() {
     }
 }
 
-
 // Обработчик изменения значения поля "число вершин"
 document.getElementById('num_vertices').addEventListener('input', function () {
     const n = parseInt(this.value);
-    if (!isNaN(n) && n >= 1 && n <= 8) {
+    if (!isNaN(n) && n >= 2 && n <= 8) {
         updateMatrixTable(n);
     } else {
-        updateMatrixTable(3);
+        updateMatrixTable(2);
     }
-
 });
 
 // При загрузке страницы инициализируем таблицу
 document.addEventListener('DOMContentLoaded', function () {
-    const n = parseInt(document.getElementById('num_vertices').value) || 3;
+    const n = parseInt(document.getElementById('num_vertices').value) || 2;
     updateMatrixTable(n);
 });
