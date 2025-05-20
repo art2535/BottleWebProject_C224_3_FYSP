@@ -55,47 +55,45 @@ def create_spanning_tree(adj_matrix, start_vertex):
 
 
 
-def generate_random_matrix(n):
+def generate_random_matrix(n, extra_edges=2):
     """
-    Generate a random adjacency matrix for a connected graph.
+    Generate an adjacency matrix for a connected undirected graph.
 
-    This function generates a random adjacency matrix for a connected graph with `n` vertices. 
-    It first creates a chain of vertices connected sequentially and then adds some random edges 
-    to ensure the graph remains connected.
+    The graph is built as a connected chain and then enhanced with a fixed number
+    of additional random edges to introduce more complexity without relying on probability.
+    
+    Parameters:
+        n (int): Number of vertices
+        extra_edges (int): Number of extra edges to add beyond the base chain
+
+    Returns:
+        list[list[int]]: Adjacency matrix of the generated graph
     """
-    matrix = [[0] * n for _ in range(n)]  # Initialize an empty matrix
-    vertices = list(range(n))  
-    random.shuffle(vertices)  # Shuffle vertices to randomize edge creation
+    matrix = [[0] * n for _ in range(n)]  # Initialize an empty adjacency matrix
+    vertices = list(range(n))
+    random.shuffle(vertices)  # Randomize the vertex order to create a non-linear chain
+
+    # Build a base chain to ensure connectivity
     for i in range(n - 1):
-        u, v = vertices[i], vertices[i + 1]  # Connect sequential vertices
-        matrix[u][v] = matrix[v][u] = 1  # Set the edge between them
+        u, v = vertices[i], vertices[i + 1]
+        matrix[u][v] = matrix[v][u] = 1  # Add undirected edge
 
-    # Add some random edges to ensure the graph stays connected
-    for i in range(n):
-        for j in range(i + 1, n):
-            if random.random() < 0.3 and matrix[i][j] == 0:  # 30% chance to add edge
-                matrix[i][j] = matrix[j][i] = 1
-    return matrix  # Return the generated matrix
+    # Generate all possible edge pairs not already used
+    possible_edges = [
+        (i, j) for i in range(n) for j in range(i + 1, n)
+        if matrix[i][j] == 0
+    ]
+    random.shuffle(possible_edges)
+
+    # Add a fixed number of extra edges (no probabilities)
+    for k in range(min(extra_edges, len(possible_edges))):
+        i, j = possible_edges[k]
+        matrix[i][j] = matrix[j][i] = 1
+
+    return matrix
 
 
-def save_to_json(adj_matrix, start_vertex, tree_matrix, filename="static/dynamic/graphs/dfs_data.json"):
-    """
-    Save input and output data to a JSON file.
 
-    This function saves the adjacency matrix, the start vertex, and the adjacency matrix of the 
-    spanning tree to a JSON file for later use.
-    """
-    data = {
-        "dfs": {
-            "adjacency_matrix": adj_matrix,
-            "start_vertex": start_vertex,
-            "tree_matrix": tree_matrix
-        }
-    }
-    # Create directory if it doesn't exist and save the data
-    os.makedirs(os.path.dirname(filename), exist_ok=True)
-    with open(filename, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=4)
 
 
 def save_graph_image(G_full, T_tree, filename="static/dynamic/graphs/spanning_tree_dfs_1.png"):
@@ -157,9 +155,6 @@ def validate_input(vertices, start_vertex, adj_matrix):
             # Check for self-loops (diagonal elements should be 0)
             if i == j and adj_matrix[i][j] == 1:
                 return "Self-loops (diagonal elements) are not allowed"
-            # Check for symmetry in the adjacency matrix
-            if adj_matrix[i][j] != adj_matrix[j][i]:
-                return "Adjacency matrix must be symmetric"
     return None  # Return None if all checks pass
 
 
@@ -244,7 +239,7 @@ def process_dfs_request():
                 elif G and T:
                     # Save the graph image and tree data if the spanning tree was created successfully
                     graph_path = save_graph_image(G, T)
-                    save_to_json(adj_matrix, start_vertex, tree_matrix)
+                    
 
         except (ValueError, TypeError) as e:
             # Handle any input errors (invalid values or types)
