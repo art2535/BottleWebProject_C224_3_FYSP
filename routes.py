@@ -70,7 +70,7 @@ def greedy_coloring_page():
 
     return dict(
         year=year,
-        title='Section 4',
+        title='Greedy Coloring',
         theory_text=theory_text,
         form_data=form_data,
         coloring_result_table=coloring_result_table,
