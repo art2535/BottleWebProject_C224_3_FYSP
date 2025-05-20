@@ -122,6 +122,6 @@
         </section>
     </div>
 
-    <script src="/scripts/greedy-coloring-script.js"></script>
+    <script src="/static/scripts/greedy-coloring-script.js"></script>
 </body>
 </html>

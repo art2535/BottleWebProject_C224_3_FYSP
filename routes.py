@@ -60,7 +60,7 @@ def beam():
 
 
 @route('/greedy_coloring', method=['GET', 'POST'])
-@view('greedy_coloring_page')
+@view('greedy_coloring')
 def greedy_coloring_page():
     year = datetime.now().year
     theory_text = get_theory('static/theory/graph_coloring_theory.md')
