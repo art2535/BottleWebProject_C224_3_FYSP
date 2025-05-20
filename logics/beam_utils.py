@@ -28,7 +28,7 @@ def get_data(request):
             result_is_error (bool): True if result is an error message, False otherwise.
     """
     # Default number of vertices if the user does not specify one
-    default_n = 3
+    default_n = 2
     
     # Initialize the form_data dictionary with default values for the form fields
     form_data = {
@@ -48,8 +48,8 @@ def get_data(request):
             n_str = request.forms.get('n', str(default_n)).strip()
             n = int(n_str)
             # Enforce a valid range of vertices between 3 and 7
-            if n < 3 or n > 7:
-                raise ValueError("Number of vertices must be between 3 and 7")
+            if n < 2 or n > 7:
+                raise ValueError("Number of vertices must be between 2 and 7")
             form_data['n'] = n_str
 
             # Initialize adjacency and weight matrices with zeros according to n
