@@ -36,7 +36,7 @@
         <div class="card">
             <h2>Greedy Algorithm</h2>
             <p>The Greedy Algorithm is a method for solving problems by making the locally optimal choice at each step. It is simple to implement and effective for tasks such as constructing minimum spanning trees or task scheduling.</p>
-            <a href="/section4" class="button">To Solution</a>
+            <a href="/greedy_coloring" class="button">To Solution</a>
         </div>
     </div>
 </div>
