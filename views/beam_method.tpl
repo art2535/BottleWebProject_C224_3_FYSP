@@ -39,7 +39,7 @@
                     <div class="input-group">
                         <div class="input-item">
                             <label for="n-vertices">Number of Vertices:</label>
-                            <input type="number" name="n" id="n-vertices" class="input-field" min="3" max="7" required value="{{ form_data['n'] }}">
+                            <input type="number" name="n" id="n-vertices" class="input-field" min="2" max="7" required value="{{ form_data['n'] }}">
                         </div>
                     </div>
                     <div class="adjacency-matrix">
