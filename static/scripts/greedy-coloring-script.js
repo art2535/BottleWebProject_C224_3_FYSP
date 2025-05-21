@@ -70,8 +70,8 @@ function updateAdjacencyMatrixTable() {
 function generateRandomValues() {
     // Fill the adjacency matrix with a random connected undirected graph
     const numVertices = parseInt(document.getElementById('num_vertices').value);
-    if (isNaN(numVertices) || numVertices < 2) {
-        alert("Please enter a valid number of vertices.");
+    if (isNaN(numVertices) || numVertices < 2 || numVertices > 8) {
+        alert("Please enter a valid number of vertices (2–8).");
         return;
     }
 
@@ -133,7 +133,7 @@ function resetGraph() {
 function validateAndSubmit() {
     // Validate matrix before form submission
     const numVertices = parseInt(document.getElementById('num_vertices').value);
-    if (isNaN(numVertices) || numVertices < 2) {
+    if (isNaN(numVertices) || numVertices < 2 || numVertices > 8) {
         alert("Please enter a valid number of vertices (2–8).");
         return false;
     }
