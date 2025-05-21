@@ -105,9 +105,10 @@ def draw_colored_graph(adjacency_matrix, coloring_result, num_colors_used):
 
     # Create a matplotlib figure for the graph
     plt.figure(figsize=(7, 7))
+    labels = {i: i + 1 for i in G.nodes()}
     nx.draw(
         G, pos,
-        with_labels=True,
+        labels=labels,
         node_color=node_colors,
         node_size=700,
         font_size=10,

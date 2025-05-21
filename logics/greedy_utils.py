@@ -87,7 +87,7 @@ def get_data(request):
                     hex_color = palette[idx]
 
                 coloring_result_table.append({
-                    'vertex': vertex,
+                    'vertex': vertex + 1,
                     'color_id': color_id,
                     'hex_color': hex_color
                 })
