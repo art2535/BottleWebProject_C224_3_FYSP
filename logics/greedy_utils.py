@@ -38,8 +38,8 @@ def get_data(request):
             n_str = request.forms.get('num_vertices', str(default_n)).strip()
             n = int(n_str)
 
-            if n < 1 or n > 8:
-                raise ValueError("Number of vertices must be between 1 and 8.")
+            if n < 2 or n > 8:
+                raise ValueError("Number of vertices must be between 2 and 8.")
 
             form_data['num_vertices'] = n_str
             input_for_log['num_vertices'] = n
