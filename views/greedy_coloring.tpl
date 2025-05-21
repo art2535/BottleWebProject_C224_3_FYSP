@@ -53,11 +53,11 @@
                         <div class="input-group">
                             <div class="input-item">
                                 <!-- Input to define number of vertices in the graph -->
-                                <label for="num_vertices">Number of Vertices (1–8):</label>
+                                <label for="num_vertices">Number of Vertices (2–8):</label>
                                 <input type="number" id="num_vertices" name="num_vertices"
                                        class="input-field"
                                        value="{{ form_data.get('num_vertices', 3) }}"
-                                       min="1" max="8"
+                                       min="2" max="8"
                                        onchange="updateAdjacencyMatrixTable()">
                             </div>
                         </div>
