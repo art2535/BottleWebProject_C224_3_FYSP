@@ -19,7 +19,7 @@ class TestGreedyGraphColoring(unittest.TestCase):
                         f"Adjacent vertices {i} and {j} share color {coloring[i]}"
                     )
 
-    def test_empty_graph(self):
+    def test_greedyGraphColoring_emptyGraph_ReturnsEmptyColoring(self):
         """Empty graph."""
         adjacency = []
         colors, num_colors, mat = greedy_graph_coloring(adjacency)
@@ -27,7 +27,7 @@ class TestGreedyGraphColoring(unittest.TestCase):
         self.assertEqual(num_colors, 0)
         self.assertEqual(mat, adjacency)
 
-    def test_single_vertex(self):
+    def test_greedyGraphColoring_singleVertexGraph_ReturnsSingleColor(self):
         """Single isolated vertex."""
         adjacency = [[0]]
         colors, num_colors, mat = greedy_graph_coloring(adjacency)
@@ -35,7 +35,7 @@ class TestGreedyGraphColoring(unittest.TestCase):
         self.assertEqual(num_colors, 1)
         self.assertEqual(mat, adjacency)
 
-    def test_two_connected_vertices(self):
+    def test_greedyGraphColoring_2x2ConnectedGraph_ReturnsTwoDifferentColors(self):
         """Two connected vertices should receive different colors (1 and 2)."""
         adjacency = [
             [0, 1],
@@ -45,7 +45,7 @@ class TestGreedyGraphColoring(unittest.TestCase):
         self.assertEqual(num_colors, 2)
         self.assertDictEqual(colors, {0: 1, 1: 2})
 
-    def test_two_disconnected_vertices(self):
+    def test_greedyGraphColoring_2x2DisconnectedGraph_ReturnsOneColor(self):
         """Two disconnected vertices can both have the same color."""
         adjacency = [
             [0, 0],
@@ -55,7 +55,7 @@ class TestGreedyGraphColoring(unittest.TestCase):
         self.assertEqual(num_colors, 1)
         self.assertDictEqual(colors, {0: 1, 1: 1})
 
-    def test_path_graph(self):
+    def test_greedyGraphColoring_4x4PathGraph_ReturnsTwoColors(self):
         """A linear graph with 4 vertices (path) should require 2 colors."""
         adjacency = [
             [0,1,0,0],
@@ -68,7 +68,7 @@ class TestGreedyGraphColoring(unittest.TestCase):
         self.assertEqual(num_colors, 2)
         self.assert_valid_coloring(adjacency, colors)
 
-    def test_fully_connected_4_vertices(self):
+    def test_greedyGraphColoring_4x4FullyConnectedGraph_ReturnsFourColors(self):
         """A fully connected graph (clique) of 4 vertices requires 4 colors."""
         n = 4
         adjacency = [[0 if i==j else 1 for j in range(n)] for i in range(n)]
@@ -78,7 +78,7 @@ class TestGreedyGraphColoring(unittest.TestCase):
         expected = {0:1, 1:2, 2:3, 3:4}
         self.assertDictEqual(colors, expected)
 
-    def test_disconnected_components(self):
+    def test_greedyGraphColoring_5x5DisconnectedComponents_ReturnsThreeColors(self):
         """
         Two components: K3 and K2.
         Verifies that the algorithm correctly colors both components
@@ -96,7 +96,7 @@ class TestGreedyGraphColoring(unittest.TestCase):
         self.assertEqual(num_colors, 3)
         self.assert_valid_coloring(adjacency, colors)
 
-    def test_max_vertices_chain(self):
+    def test_greedyGraphColoring_8x8ChainGraph_ReturnsAtMostTwoColors(self):
         """
         Maximum allowed number of vertices (8) in a chain.
         A chain is a bipartite graph, so num_colors should be ≤ 2.
