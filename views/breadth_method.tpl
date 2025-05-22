@@ -60,7 +60,7 @@
 
                         <!-- Кнопки управления графом -->
                         <div class="controls">
-                            <button type="submit" class="btn">Build Graph</button>
+                            <button type="submit" class="btn" id="build_graph">Build Graph</button>
                             <button type="button" class="btn" onclick="generateRandomMatrix()">Generate Random Matrix</button>
                             <button type="button" class="btn" onclick="clearFields()">Reset</button>
                         </div>
